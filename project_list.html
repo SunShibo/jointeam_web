@@ -5,8 +5,8 @@
 		<title>中竞集团</title>
 		<!-- import CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="css/public.css" />
-		<link rel="stylesheet" type="text/css" href="css/template.css" />
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/project_list.css" />
 	</head>
 	<body>
 		<div id="app">
@@ -25,54 +25,23 @@
 					</el-menu>
 				</el-header>
 				<el-main>
-					<div class="headImg">
-						<p class="headTitle">报告模板</p>
-						<p class="headText">Report template</p>
-					</div>
-
+					<div class="headImg"></div>
+					
 					<div class="container">
 						<div class="content">
-							<div class="card">
-								<div class="cont_card_left">
-									<p class="card_title">报告模板</p>
-									<div class="card_list">
-										<div class="card_list_left" v-for="(item,index) in card" :key="index">
-											<p>{{item.name}}</p>
-											<img src="images/right_1.png" class="card_img">
-										</div>
-									</div>
-								</div>
-								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index">
-										<div class="cont_card_right">
-											<div class="right_list" v-for="items in 4" :key="items">
-												<div class="template_list">
-													<img src="images/word_1.png" class="temp_word">
-													<div class="temp_right">
-														<p class="temp_title">{{item.temp}}</p>
-														<div class="temp_preview">
-															<img src="images/icon_yan.png" >
-															<p>预览</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
-
+					
 				</el-main>
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
 		</div>
 	</body>
-	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	<!-- import Vue before Element -->
+	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
-	<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/project_list.js" type="text/javascript" charset="utf-8"></script>
 </html>
