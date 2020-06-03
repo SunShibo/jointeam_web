@@ -25,13 +25,18 @@ new Vue({
 }).$mount('#app')
 
 $('.card_list_left:first').addClass('light_greycolor');
-$('.cont_card_right:first').addClass('temps').siblings('div').removeClass('temps');
+$('.card_img:first').attr('src','images/right_2.png');
+$('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
 
 $('.card_list_left').click(function(){
 	var index = $(this).index();
 	$(this).siblings('div').removeClass('light_greycolor');  // 删除其他兄弟元素的样式
     $(this).addClass('light_greycolor');
-	$('.cont_card_right').eq(index).addClass('temps').siblings('div').removeClass('temps');
+	
+	$(this).find('img').attr('src','images/right_2.png');
+	$(this).siblings().find('img').attr('src','images/right_1.png');
+	
+	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
 })
 
 

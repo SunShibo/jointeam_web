@@ -120,18 +120,19 @@ img {
 
 }
 
-
-.cont_card_right {
+.cards_t{
 	position: absolute;
 	border: 1px solid #EBECF2;
 	margin-left: 40px;
 	margin-bottom: 32px;
 	padding: 40px 40px 8px 40px;
-	display: flex;
 	width: 832px;
+	display: none;
+}
+.cont_card_right {
+	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	opacity: 0;
 }
 
 .right_list {
@@ -183,7 +184,7 @@ img {
 
 .temp_preview img {
 	width: 14px;
-	height: 10px;
+	height: 14px;
 	display: flex;
 	margin: auto 0;
 	margin-left: 24px;
@@ -198,5 +199,5 @@ img {
 }
 
 .temps{
-	opacity: 1;
+	display: block;
 }

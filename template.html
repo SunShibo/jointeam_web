@@ -38,25 +38,28 @@
 									<div class="card_list">
 										<div class="card_list_left" v-for="(item,index) in card" :key="index">
 											<p>{{item.name}}</p>
-											<img src="images/right_1.png" >
+											<img src="images/right_1.png" class="card_img">
 										</div>
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cont_card_right" v-for="(item,index) in template" :key="index">
-										<div class="right_list" v-for="items in 4" :key="items">
-											<div class="template_list">
-												<img src="images/word_1.png" class="temp_word">
-												<div class="temp_right">
-													<p class="temp_title">{{item.temp}}</p>
-													<div class="temp_preview">
-														<img src="images/time.png" >
-														<p>预览</p>
+									<div class="cards_t" v-for="(item,index) in template" :key="index">
+										<div class="cont_card_right">
+											<div class="right_list" v-for="items in 4" :key="items">
+												<div class="template_list">
+													<img src="images/word_1.png" class="temp_word">
+													<div class="temp_right">
+														<p class="temp_title">{{item.temp}}</p>
+														<div class="temp_preview">
+															<img src="images/icon_yan.png" >
+															<p>预览</p>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									
 								</div>
 								
 								
