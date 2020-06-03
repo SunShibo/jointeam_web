@@ -1,0 +1,58 @@
+.el-main {
+	display: flex;
+	background-color: #E9EEF3;
+	background: url(../images/banner_1.png) no-repeat;
+	background-size: cover;
+	color: #333;
+	text-align: center;
+	height: 796px;
+	overflow: hidden;
+}
+
+.loginBox {
+	position: relative;
+	margin: auto;
+	width: 342px;
+	height: 348px;
+	background-color: #FFFFFF;
+	padding: 33px 60px 66px 60px;
+}
+
+.loginTitle {
+	font-size: 24px;
+	font-family: PingFangSC-Semibold, PingFang SC;
+	font-weight: 600;
+	color: #3F58BE;
+}
+
+.phoneNum {
+	margin-top: 30px;
+	margin-bottom: 24px;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+	background-color: #3F58BE;
+	border-color: #3F58BE;
+}
+
+.el-checkbox__input.is-checked+.el-checkbox__label {
+	color: #7A7D90;
+}
+
+.el-checkbox:last-of-type {
+	margin-top: 14px;
+	position: absolute;
+	left: 60px;
+}
+
+.el-button--primary {
+	width: 100%;
+	margin-top: 64px;
+	background-color: #3F58BE;
+	border-color: #3F58BE;
+}
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #1c75ff;
+    border-color: #1c75ff;
+}

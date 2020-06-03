@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>中竞集团</title>
+		<!-- import CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/aboutUs.css" />
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
+						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
+						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
+						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
+						<el-menu-item index="5">我的项目</el-menu-item>
+						<el-menu-item index="6"><a href="login.html">个人中心</a></el-menu-item>
+					</el-menu>
+				</el-header>
+				<el-main>
+					<div class="headImg">
+						<p class="headTitle">关于我们</p>
+						<p class="headText">About Us</p>
+					</div>
+					<div class="container">
+						<div class="content">
+							<p class="cont_title">中竞集团简介</p>
+							<div class="introduction">
+								<div class="introd_img">
+									<img src="images/banner_1.png" >
+								</div>
+								<div class="introd_text">
+									<p>中竞同创能源环境科技集团股份有限公司（以下简称 “中竞集团”）创始于2002年，是国家级高新技术企业，是国家发改委、工信部首批备案的节能服务公司，是中央国家机关工程定点实施单位，是部分委办局节能减排业务支撑单位，是北京温室气体自愿减排交易（CCER）服务中心发起机构，是众多用能单位节能环保领域战略合作伙伴及节能减排业务服务单位。</p>
+									<p>中竞集团秉承自主创新、协同创新、融合创新的发展战略，经过近20年的不断进步与发展，业务已拓展为节能、环保、新能源、卫生与健康四大板块，涵盖咨询服务、实施服务、产品服务、托管运营服务四个模块，并为政府机关、行业主管部门、公共机构、工业企业等数千家客户提供了高品质综合能源服务。</p>
+									<p>中竞集团作为建筑与工业领域能源系统的综合服务提供商，近20年以来凭借自主创新、协同创新、融合创新不断研发节能产品和技术，不断强化服务技术体系，为建筑及工业领域用能单位提供咨询服务、技术服务、产品服务及运营服务为一体的全产业链式综合能源服务提供商。</p>
+								</div>
+							</div>
+							
+							
+							<p class="cont_title">荣誉资质</p>
+							<div class="introduction">
+								<ul class="introd_lift">
+									<li v-for="item in 10" :key='item'>
+										<img src="images/list_icon.png" >
+										<p>国家高新技术企业、中关村高新技术企业</p>
+									</li>
+								</ul>
+								
+								<div class="introd_img">
+									<img src="images/banner_1.png" >
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</el-main>
+				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
+			</el-container>
+		</div>
+	</body>
+	<!-- import Vue before Element -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/aboutUs.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>中竞集团</title>
+		<!-- import CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
+						<el-menu-item index="2">消息管理</el-menu-item>
+						<el-menu-item index="3">关于我们</el-menu-item>
+						<el-menu-item index="4">下载模板</el-menu-item>
+						<el-menu-item index="5">我的项目</el-menu-item>
+						<el-menu-item index="6"><a href="login.html">登录</a></el-menu-item>
+					</el-menu>
+				</el-header>
+				<el-main>
+					<div class="loginBox">
+						<p class="loginTitle">登录</p>
+						<el-input v-model="phone" placeholder="请输入手机号" maxlength="11" class="phoneNum"></el-input>
+						<el-input v-model="password" placeholder="请输入密码" show-password></el-input>
+						<el-checkbox v-model="checked">记住密码</el-checkbox>
+						<el-button type="primary" @click="onSubmit">登录</el-button>
+					</div>
+				</el-main>
+				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
+			</el-container>
+		</div>
+	</body>
+	<!-- import Vue before Element -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+</html>

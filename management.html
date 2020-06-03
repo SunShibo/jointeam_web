@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>中竞集团</title>
+		<!-- import CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/management.css" />
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
+						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
+						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
+						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
+						<el-menu-item index="5">我的项目</el-menu-item>
+						<el-menu-item index="6"><a href="">个人中心</a></el-menu-item>
+					</el-menu>
+				</el-header>
+				<el-main>
+					<div class="headImg">
+						<img src="images/banner_3.png" lazy>
+					</div>
+					<div class="container">
+						<div class="content">
+							<div class="cont_l">
+								<div class="cont_head">
+									<p class="cont_title">研究报告称中国成为全球绿色能源发展的核心驱动者</p>
+									<div class="industry_cont">
+										<div class="industry_icon">
+											<img src="images/time.png">
+										</div>
+										<p class="in_text">05/14 13:23:12</p>
+										<p class="in_text_one">来源：中国科技网</p>
+									</div>
+								</div>
+								<div class="article">
+									<p>第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发展的核心驱动者和绿色能源技术进步的重要领导者。</p>
+									<img src="images/banner_3.png" >
+								</div>
+							</div>
+							<div class="industry_right">
+								<div class="mall_titles">
+									<div class="mall_line"></div>
+									<p>相关资讯</p>
+								</div>
+								<div class="industry_list" v-for="item in 3" :key="item">
+									<div class="list_img">
+										<img src="images/banner_3.png">
+									</div>
+									<div class="list_cont">
+										<p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
+										<p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
+										<div class="industry_cont">
+											<div class="industry_icon">
+												<img src="images/time.png">
+											</div>
+											<p class="in_text">05/14 13:23:12</p>
+											<p class="in_text_one">来源：中国科技网</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</el-main>
+				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
+			</el-container>
+		</div>
+	</body>
+	<!-- import Vue before Element -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/management.js" type="text/javascript" charset="utf-8"></script>
+</html>
