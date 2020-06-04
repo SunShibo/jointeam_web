@@ -10,7 +10,9 @@ new Vue({
 				introduction: '',
 				source: '',
 				updateTime: ''
-			}
+			},
+			serve:[],
+			records:[]
 		};
 	},
 	methods: {
@@ -36,12 +38,37 @@ new Vue({
 			var that = this;
 			axios.post(url + '/main/meau')
 				.then(function(res) {
-					console.log(res);
+//					console.log(res);
 					if(res.success = true) {
 						let dataTime = res.data.data.industry.list.updateTime;
 						let times = that.unixTimeToDateTime(dataTime);
 						res.data.data.industry.list['updateTime'] = times;
 						that.industry = res.data.data.industry.list;
+						that.serve = res.data.data.serve;
+						if(that.serve.length > 3){
+							$('.cont_container').css('width','80%');
+						}
+						
+					} else {
+						alert(res.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		loadList(){
+			var that = this;
+			axios.post(url + '/industry/selectIndustryList',{
+				pageNo:'1',
+				pageSize:'3'
+			})
+				.then(function(res) {
+//					console.log(res);
+					if(res.success = true) {
+//						var rec = res.data.data.records;
+						that.records = res.data.data.records;
+						
 					} else {
 						alert(res.msg)
 					}
@@ -61,5 +88,9 @@ new Vue({
 	mounted() {
 		this.loadBanner();
 		this.loadData();
+		this.loadList();
 	}
 }).$mount('#app')
+
+var a = localStorage.getItem('information');
+console.log(JSON.parse(a))

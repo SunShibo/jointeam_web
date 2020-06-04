@@ -85,18 +85,18 @@
 							</div>
 
 							<div class="mall">
-								<div class="mall_list" v-for="item in 3" :key='item'>
-									<div class="mall_titles">
+								<div class="mall_list" v-for="(item,index) in serve" :key='index'>
+									<div class="mall_titles" >
 										<div class="mall_line"></div>
-										<p>节能服务</p>
+										<p>{{item.typeName}}</p>
 									</div>
 									<div class="mall_main">
-										<div class="mall_cont" v-for="list in 3" :key='list'>
+										<div class="mall_cont" v-for="(items,indexs) in item.list" :key='indexs'>
 											<div class="mall_img">
-												<img src="">
+												<img :src="items.image">
 											</div>
 											<div class="mall_right">
-												<p class="mall_title">标准制定</p>
+												<p class="mall_title">{{items.title}}</p>
 												<p class="mall_content">根据政府部门/行业节能减排和应对气候变化工作应对气候变应对气候变</p>
 												<a href="" class="mall_href">查看详情</a>
 											</div>
@@ -134,19 +134,19 @@
 								</div>
 
 								<div class="industry_right">
-									<div class="industry_list" v-for="item in 3" :key="item">
+									<div class="industry_list" v-for="(item,index) in records" :key="index">
 										<div class="list_img">
-											<img src="images/banner_3.png">
+											<img :src="item.image">
 										</div>
 										<div class="list_cont">
-											<p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
-											<p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
+											<p class="list_title">{{item.title}}</p>
+											<p class="list_cos">{{item.introduction}}</p>
 											<div class="industry_cont">
 												<div class="industry_icon">
 													<img src="images/time.png">
 												</div>
-												<p>05/14 13:23:12</p>
-												<p>来源：中国科技网</p>
+												<p>{{unixTimeToDateTime(item.updateTime)}}</p>
+												<p>&nbsp;&nbsp;来源：{{item.source}}</p>
 											</div>
 										</div>
 									</div>
@@ -162,6 +162,7 @@
 		</div>
 		<!-- import Vue before Element -->
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 		<!-- import JavaScript -->

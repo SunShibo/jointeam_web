@@ -42,6 +42,7 @@ var cont = new Vue({
 					})
 					.then(function(res) {
 						localStorage.setItem("cookie", document.cookie);
+						localStorage.setItem("information", JSON.stringify(res.data.data));
 
 						if(res.success = true) {
 							 window.location.href='./index.html'

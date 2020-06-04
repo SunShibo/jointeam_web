@@ -143,8 +143,12 @@
 	margin-top: 40px;
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
+.mall_list{
+	width: 360px;
+}
 .mall_titles {
 	margin-bottom: 8px;
 	display: flex;
