@@ -50,20 +50,20 @@
 										</div>
 									</div>
 									<ul class="timeLine">
-										<li class="timeLine_list" v-for="item in 3" :key="item">
-											<div class="time_right" v-if="item == 1">
-												<p class="timeTime_time timeTime_times">5月6日 星期三</p>
-												<p class="timeTime_cont timeTime_times">解决方案设计评审</p>
-												<p class="timeTime_pop timeTime_times">负责人：ALIEN</p>
+										<li class="timeLine_list" v-for="item in progressList">
+											<div class="time_right" v-if="item.status == 'finished'">
+												<p class="timeTime_time timeTime_times">{{item.formatStartTime}}</p>
+												<p class="timeTime_cont timeTime_times">{{item.title}}</p>
+												<p class="timeTime_pop timeTime_times">{{item.formatStartTime}}</p>
 											</div>
 											<div class="time_right" v-else>
-												<p class="timeTime_time">5月6日 星期三</p>
-												<p class="timeTime_cont">解决方案设计评审</p>
-												<p class="timeTime_pop">负责人：ALIEN</p>
+												<p class="timeTime_time">{{item.formatStartTime}}</p>
+												<p class="timeTime_cont">{{item.title}}</p>
+												<p class="timeTime_pop">{{item.formatStartTime}}</p>
 											</div>
-											
-											<img src="images/banner_3.png" class="time_img">
-											<img src="images/group_1.png" alt="" class="time_icons" v-if="item == 1">
+
+											<img v-bind:src="item.image" class="time_img">
+											<img src="images/group_1.png" alt="" class="time_icons" v-if="item.status == 'finished'">
 											<img src="images/group_2.png" alt="" class="time_icon" v-else>
 										</li>
 									</ul>
@@ -85,15 +85,15 @@
 
 							<div class="card_temp">
 								<div class="cont_card_right">
-									<div class="right_list" v-for="item in 3" :key="item">
-										<div class="template_list">
+									<div class="right_list" v-for="(item,index) in projectList" :key="index">
+										<div class="template_list" @click="template_href(item.projectId);">
 											<div class="temp_right">
-												<p>Low Cost Advertising</p>
-												<p>5月8日 星期三</p>
-												<p>施工队进场进行施工</p>
-												<p>负责人：ALIEN</p>
+												<p>{{item.projectName}}</p>
+												<p>{{item.formatStartTime}}</p>
+												<p>{{item.title}}</p>
+												<p>{{item.stuffName}}</p>
 											</div>
-											<img src="images/word_1.png" class="temp_word">
+											<img v-bind:src="item.image" class="temp_word">
 										</div>
 									</div>
 								</div>
@@ -109,7 +109,7 @@
 	<!-- import Vue before Element -->
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/project_list.js" type="text/javascript" charset="utf-8"></script>
 </html>

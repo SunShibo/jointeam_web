@@ -3,18 +3,16 @@ var cont = new Vue({
 	data() {
 		return {
 			activeIndex: '5',
+			accomplishStatus: 'having',
 			card:[
 				{name:'进行中'},
 				{name:'已完成'}
 			],
-			template:[
-				{temp:'质量验收模板'},
-				{temp:'质量验收模板3'}
-			],
-			itemTemp:[
-				{name:'时间设计点击俺就'},
-				{name:'分手的'},
-				{name:'的热无若'}
+			projectList: [
+				{projectId: 1, projectName: 'Low Cost Advertising', title: '技术现场勘查', stuffName: '负责人:张三', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/XAs5BG_1590898805161.png'},
+				{projectId: 2, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：李四', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/K6r5hX_1590898943734.jpg'},
+				{projectId: 3, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：王五', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/8CkdH4_1590899169530.jpg'},
+				{projectId: 4, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：赵柳', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/XAs5BG_1590898805161.png'}
 			]
 		}
 	},
@@ -22,13 +20,28 @@ var cont = new Vue({
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		template_href(){
-			console.log(111)
-			window.location.href='./project_list.html';
+		template_href(projectId){
+			window.location.href='./project_list.html?projectId=' + projectId;
+		},
+		initProject(){
+			$.ajax({
+				url: url + '/project/selectProjectByUserId',
+				data:{pageNo: 1, pageSize: 10, accomplishStatus: cont.accomplishStatus},
+				dataType: "json",
+				type: "post",
+				header: {'Content-Type': 'application/json'},
+				success: function(res) {
+					console.log("调用完成方法：" + JSON.stringify(res));
+					if(res.code = "00000"){
+						console.log("result" + JSON.stringify(res.data))
+					}
+				}
+			})
 		}
 	}
 }).$mount('#app')
-var height = 138*cont.itemTemp.length;
+
+var height = 138*cont.projectList.length;
 $('.card_temp').css('height',height)
 
 $('.card_list_left:first').addClass('light_greycolor');
@@ -44,6 +57,16 @@ $('.card_list_left').click(function(){
 	$(this).siblings().find('img').attr('src','images/right_1.png');
 	
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
+
+	if(index == 0){  // 进行中
+		cont.accomplishStatus = 'having';
+	}else if(index == 1){  // 已完成
+		cont.accomplishStatus = 'finished';
+	}
+	cont.initProject();
 })
 
 
+$(function(){
+	cont.initProject();
+})

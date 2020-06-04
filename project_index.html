@@ -43,17 +43,17 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index">
+									<div class="cards_t" >
 										<div class="cont_card_right">
-											<div class="right_list" v-for="(items,index) in itemTemp" :key="index">
-												<div class="template_list" @click="template_href()">
+											<div class="right_list" v-for="(item,index) in projectList" :key="index">
+												<div class="template_list" @click="template_href(item.projectId);">
 													<div class="temp_right">
-														<p>Low Cost Advertising</p>
-														<p>5月8日 星期三</p>
-														<p>施工队进场进行施工</p>
-														<p>负责人：ALIEN</p>
+														<p>{{item.projectName}}</p>
+														<p>{{item.formatStartTime}}</p>
+														<p>{{item.title}}</p>
+														<p>{{item.stuffName}}</p>
 													</div>
-													<img src="images/word_1.png" class="temp_word">
+													<img v-bind:src="item.image" class="temp_word">
 												</div>
 											</div>
 										</div>
@@ -73,5 +73,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/project_index.js" type="text/javascript" charset="utf-8"></script>
 </html>
