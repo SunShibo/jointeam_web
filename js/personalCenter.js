@@ -4,25 +4,24 @@ var cont = new Vue({
 		return {
 			activeIndex: '6',
 			imageUrl: 'images/my.png',
+
 			form: {
-				nickname: '',
-				phoneNum: '',
-				vcode: '',
-				email: '',
+				name: '',
+				phone: '',
+				vCode: '',
+				mailbox: '',
 			},
-			ruleForm:{
-				title:'',
-				textarea:''
+			ruleForm: {
+				title: '',
+				content: ''
 			},
+			tableData: [],
 			currentPage: 1,
 			card: [{
 					name: '基本信息'
 				},
 				{
 					name: '员工列表'
-				},
-				{
-					name: '系统推送'
 				},
 				{
 					name: '消息管理'
@@ -48,27 +47,87 @@ var cont = new Vue({
 					name: '的热无若'
 				}
 			],
-			tableData: [{
-				date: '2016-05-02',
-				name: '王小虎',
-				address: '上海市普陀区金沙江路 1518 弄'
-			}, {
-				date: '2016-05-04',
-				name: '王小虎',
-				address: '上海市普陀区金沙江路 1517 弄'
-			}, {
-				date: '2016-05-01',
-				name: '王小虎',
-				address: '上海市普陀区金沙江路 1519 弄'
-			}, {
-				date: '2016-05-03',
-				name: '王小虎',
-				address: '上海市普陀区金沙江路 1516 弄'
-			}],
 			
+			alltime:60,
+			
+			nowtime:"发送验证码",
+			
+			isNo:true,
+			totalCount:""
 		}
 	},
 	methods: {
+		submitInfo(){
+			var that = this;
+			axios.post('https://hny.jointeam6.com/', {
+				"phone":that.form.phone
+			}).then(function(res) {
+					console.log(res);
+					if (res.success = true) {
+						that.nowtime = that.alltime;
+						var int = setInterval(()=>{
+							that.nowtime--;
+							if(that.nowtime <= 0){
+								that.nowtime = "发送验证码";
+								int = window.clearInterval(int);
+								that.isNo = true;
+							}else{
+								that.isNo = false;
+							}
+						},1000);
+					} else {
+						that.$message.error("短信发送失败,请稍后重试");
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		
+		sendvCode() {
+			var that = this;
+			axios.post('https://hny.jointeam6.com/user/send', {
+				"phone":that.form.phone
+			}).then(function(res) {
+					console.log(res);
+					if (res.success = true) {
+						that.nowtime = that.alltime;
+						var int = setInterval(()=>{
+							that.nowtime--;
+							if(that.nowtime <= 0){
+								that.nowtime = "发送验证码";
+								int = window.clearInterval(int);
+								that.isNo = true;
+							}else{
+								that.isNo = false;
+							}
+						},1000);
+					} else {
+						that.$message.error("短信发送失败,请稍后重试");
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+
+		setData() {
+			var that = this;
+			that.form = JSON.parse(localStorage.getItem("information"));
+		},
+
+		getData() {
+			var that = this;
+			axios.post('https://hny.jointeam6.com/staffs/queryStaffs', {})
+				.then(function(res) {
+					console.log(res);
+					if (res.success = true) {} else {}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
@@ -90,8 +149,74 @@ var cont = new Vue({
 		onSubmit(form) {
 			console.log(form);
 		},
-		submitForm(ruleForm){
-			console.log(ruleForm);
+		submitForm(ruleForm) {
+			var id = JSON.parse(localStorage.getItem("information")).id;
+			var that = this;
+			that.$refs.fbForm.validate(valid => {
+				if (valid) {
+					axios.post('https://hny.jointeam6.com/feedback/insert', {
+							"title": ruleForm.title,
+							"userId": id,
+							"content": ruleForm.content
+						})
+						.then(function(res) {
+							console.log(res);
+							if (res.success = true) {
+								that.$message.success("反馈成功");
+								that.ruleForm = {};
+							} else {
+								that.$message.error("失败");
+							}
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+				} else {
+					console.error("错误的提交方式");
+				}
+			});
+
+		},
+		
+		
+		handleSelectionChange(val) {
+			this.multipleSelection = val;
+		},
+		search() {
+			this.getData();
+		},
+		
+		showInput() {
+			this.inputVisible = true;
+			this.$nextTick(_ => {
+				this.$refs.saveTagInput.$refs.input.focus();
+			});
+		},
+		
+		handleInputConfirm() {
+			let inputValue = this.inputValue;
+			if (inputValue) {
+				this.dynamicTags.push(inputValue);
+			}
+			this.inputVisible = false;
+			this.inputValue = '';
+		},
+		
+		// 每页显示的条数
+		handleSizeChange(val) {
+			// 改变每页显示的条数
+			this.PageSize = val;
+			// 点击每页显示的条数时，显示第一页
+			this.getData(val, 1);
+			// 注意：在改变每页显示的条数时，要将页码显示到第一页
+			this.currentPage = 1;
+		},
+		// 显示第几页
+		handleCurrentChange(val) {
+			// 改变默认的页数
+			this.currentPage = val;
+			// 切换页码时，要获取每页显示的条数
+			this.getData(this.PageSize, val * this.pageSize);
 		},
 		handleSizeChange(val) {
 			console.log(`每页 ${val} 条`);
@@ -99,14 +224,21 @@ var cont = new Vue({
 		handleCurrentChange(val) {
 			console.log(`当前页: ${val}`);
 		}
+	},
+
+	mounted() {
+		this.getData();
+		this.setData();
 	}
+
 }).$mount('#app')
 var height = 138 * cont.card.length;
 $('.card_temp').css('height', height)
 
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src', 'images/right_2.png');
-$('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
+$(
+	'.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
 
 $('.card_list_left').click(function() {
 	var index = $(this).index();
