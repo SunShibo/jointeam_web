@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>中竞集团</title>
@@ -7,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
 	</head>
+
 	<body>
 		<div id="app">
 			<el-container>
@@ -15,18 +17,30 @@
 						<img src="images/logo.png">
 					</div>
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="login.html">登录</a></el-menu-item>
+						<el-menu-item index="1">
+							<a href="index.html">首页</a>
+						</el-menu-item>
+						<el-menu-item index="2">
+							<a href="management.html">消息管理</a>
+						</el-menu-item>
+						<el-menu-item index="3">
+							<a href="aboutUs.html">关于我们</a>
+						</el-menu-item>
+						<el-menu-item index="4">
+							<a href="template.html">下载模板</a>
+						</el-menu-item>
+						<el-menu-item index="5">
+							<a href="project_index.html">我的项目</a>
+						</el-menu-item>
+						<el-menu-item index="6">
+							<a href="personalCenter.html">个人中心</a>
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>
 					<el-carousel :interval="5000" arrow="always">
 						<el-carousel-item v-for="(item,index) in bannerUrl" :key="index">
-							<img :src="item.url" alt="" lazy>
+							<img :src="item.image" alt="" lazy>
 						</el-carousel-item>
 					</el-carousel>
 
@@ -106,18 +120,19 @@
 							<div class="industry">
 								<div class="industry_left">
 									<div class="industry_img">
-										<img src="images/banner_3.png">
+										<img :src="industry.image">
 									</div>
-									<p class="industry_title">研究报告称中国成为全球绿色能源发展的核心驱动者</p>
-									<p class="industry_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发色能源发</p>
+									<p class="industry_title">{{industry.title}}</p>
+									<p class="industry_cos">{{industry.introduction}}</p>
 									<div class="industry_cont">
 										<div class="industry_icon">
 											<img src="images/time.png">
 										</div>
-										<p>05/14 13:23:12</p>
-										<p>来源：中国科技网</p>
+										<p>{{industry.updateTime}}</p>
+										<p>&nbsp;&nbsp;来源：{{industry.source}}</p>
 									</div>
 								</div>
+
 								<div class="industry_right">
 									<div class="industry_list" v-for="item in 3" :key="item">
 										<div class="list_img">
@@ -145,10 +160,13 @@
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
 		</div>
+		<!-- import Vue before Element -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
+		<!-- import JavaScript -->
+		<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 	</body>
-	<!-- import Vue before Element -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<!-- import JavaScript -->
-	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
-	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+
 </html>
