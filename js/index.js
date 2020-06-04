@@ -91,6 +91,3 @@ new Vue({
 		this.loadList();
 	}
 }).$mount('#app')
-
-var a = localStorage.getItem('information');
-console.log(JSON.parse(a))
