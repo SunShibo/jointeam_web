@@ -1,4 +1,4 @@
-new Vue({
+var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
@@ -14,6 +14,11 @@ new Vue({
 				{temp:'质量验收模板1'},
 				{temp:'质量验收模板2'},
 				{temp:'质量验收模板3'}
+			],
+			itemTemp:[
+				{name:'时间设计点击俺就'},
+				{name:'分手的'},
+				{name:'的热无若'}
 			]
 		}
 	},
@@ -23,6 +28,8 @@ new Vue({
 		}
 	}
 }).$mount('#app')
+var height = 138*cont.itemTemp.length;
+$('.card_temp').css('height',height)
 
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src','images/right_2.png');

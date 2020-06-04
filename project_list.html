@@ -5,7 +5,7 @@
 		<title>中竞集团</title>
 		<!-- import CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/project_list.css" />
 	</head>
 	<body>
@@ -26,13 +26,81 @@
 				</el-header>
 				<el-main>
 					<div class="headImg"></div>
-					
+
 					<div class="container">
 						<div class="content">
-							
+							<div class="project">
+								<div class="project_low">
+									<p class="project_title">Low Cost Advertising</p>
+									<p class="project_new">同步更新项目最新进度</p>
+								</div>
+								<div class="project_pro">
+									<div class="progress">
+										<div class="startTime">
+											<span>开始时间</span>
+											<p>2020-04-16</p>
+										</div>
+										<div class="timePro">
+											<p>已完成46%</p>
+											<img src="images/group_3.png" >
+										</div>
+										<div class="startTime endTime">
+											<span>预计结束时间</span>
+											<p>2020-05-20</p>
+										</div>
+									</div>
+									<ul class="timeLine">
+										<li class="timeLine_list" v-for="item in 3" :key="item">
+											<div class="time_right" v-if="item == 1">
+												<p class="timeTime_time timeTime_times">5月6日 星期三</p>
+												<p class="timeTime_cont timeTime_times">解决方案设计评审</p>
+												<p class="timeTime_pop timeTime_times">负责人：ALIEN</p>
+											</div>
+											<div class="time_right" v-else>
+												<p class="timeTime_time">5月6日 星期三</p>
+												<p class="timeTime_cont">解决方案设计评审</p>
+												<p class="timeTime_pop">负责人：ALIEN</p>
+											</div>
+											
+											<img src="images/banner_3.png" class="time_img">
+											<img src="images/group_1.png" alt="" class="time_icons" v-if="item == 1">
+											<img src="images/group_2.png" alt="" class="time_icon" v-else>
+										</li>
+									</ul>
+									<div class="service">
+										<div class="service_pop">
+											<img src="images/my.png" >
+											<div class="ser_pop">
+												<p class="ser_name">陈文华</p>
+												<p class="ser_text">公司：中竞集团</p>
+												<p class="ser_text">职位：客户部经理</p>
+												<p class="ser_text">电话：13052668470</p>
+											</div>
+										</div>
+										<img src="images/group_4.png" class="service_ser">
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="card_temp">
+								<div class="cont_card_right">
+									<div class="right_list" v-for="item in 3" :key="item">
+										<div class="template_list">
+											<div class="temp_right">
+												<p>Low Cost Advertising</p>
+												<p>5月8日 星期三</p>
+												<p>施工队进场进行施工</p>
+												<p>负责人：ALIEN</p>
+											</div>
+											<img src="images/word_1.png" class="temp_word">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					
+
 				</el-main>
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
