@@ -4,10 +4,10 @@
 		<meta charset="UTF-8">
 		<title>中竞集团</title>
 		<!-- import CSS -->
-		<link rel="shortcut icon" href="images/logo.png" >
+		<link rel="shortcut icon" href="images/logo.png" >		
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
-		<link rel="stylesheet" type="text/css" href="css/project_index.css" />
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/service.css" />
 	</head>
 	<body>
 		<div id="app" v-cloak>
@@ -27,15 +27,15 @@
 				</el-header>
 				<el-main>
 					<div class="headImg">
-						<p class="headTitle">我的项目</p>
-						<p class="headText">My project</p>
+						<p class="headTitle">服务商城</p>
+						<p class="headText">Service Mall</p>
 					</div>
-					
+
 					<div class="container">
 						<div class="content">
 							<div class="card">
 								<div class="cont_card_left">
-									<p class="card_title">我的项目</p>
+									<p class="card_title">服务商城</p>
 									<div class="card_list">
 										<div class="card_list_left" v-for="(item,index) in card" :key="index">
 											<p>{{item.name}}</p>
@@ -44,18 +44,23 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" >
+									<div class="cards_t" v-for="(item,index) in template" :key="index">
 										<div class="cont_card_right">
-											<div class="right_list" v-for="(item,index) in projectList" :key="index">
-												<div class="template_list" @click="template_href(item.projectId);">
-													<div class="temp_right">
-														<p>{{item.projectName}}</p>
-														<p>{{item.formatStartTime}}</p>
-														<p>{{item.title}}</p>
-														<p>{{item.stuffName}}</p>
-													</div>
-													<img v-bind:src="item.image" class="temp_word">
+											<div class="card_mall" v-for="(items,index) in item.itemTemp" :key='index'>
+												<div class="mall_titles" >
+													<div class="mall_line"></div>
+													<p>{{items.name}}</p>
 												</div>
+												<div class="service_mall">
+													<div class="mall_img" v-for="(tepitems,index) in items.temp" :key="index" @click="mallDetails()">
+														<div class="mall_contImg">
+															<img src="images/banner_3.png"/>
+															<p>{{tepitems.name}}</p>
+														</div>
+	
+													</div>
+												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -63,18 +68,16 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</el-main>
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
 		</div>
 	</body>
-	<!-- import Vue before Element -->
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
-	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/project_index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/service.js" type="text/javascript" charset="utf-8"></script>
 </html>

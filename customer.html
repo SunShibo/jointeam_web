@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>中竞集团</title>
 		<!-- import CSS -->
 		<link rel="shortcut icon" href="images/logo.png" >
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
-		<link rel="stylesheet" type="text/css" href="css/project_index.css" />
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/customer.css" />
 	</head>
+
 	<body>
 		<div id="app" v-cloak>
 			<el-container>
@@ -17,25 +19,37 @@
 						<img src="images/logo.png">
 					</div>
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+						<el-menu-item index="1">
+							<a href="index.html">首页</a>
+						</el-menu-item>
+						<el-menu-item index="2">
+							<a href="management.html">消息管理</a>
+						</el-menu-item>
+						<el-menu-item index="3">
+							<a href="aboutUs.html">关于我们</a>
+						</el-menu-item>
+						<el-menu-item index="4">
+							<a href="template.html">下载模板</a>
+						</el-menu-item>
+						<el-menu-item index="5">
+							<a href="project_index.html">我的项目</a>
+						</el-menu-item>
+						<el-menu-item index="6">
+							<a href="personalCenter.html">个人中心</a>
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>
 					<div class="headImg">
-						<p class="headTitle">我的项目</p>
-						<p class="headText">My project</p>
+						<p class="headTitle">顾客成功</p>
+						<p class="headText">Customer success</p>
 					</div>
-					
+
 					<div class="container">
 						<div class="content">
 							<div class="card">
 								<div class="cont_card_left">
-									<p class="card_title">我的项目</p>
+									<p class="card_title">顾客成功</p>
 									<div class="card_list">
 										<div class="card_list_left" v-for="(item,index) in card" :key="index">
 											<p>{{item.name}}</p>
@@ -44,18 +58,11 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" >
+									<div class="cards_t" v-for="(item,index) in template" :key="index">
 										<div class="cont_card_right">
-											<div class="right_list" v-for="(item,index) in projectList" :key="index">
-												<div class="template_list" @click="template_href(item.projectId);">
-													<div class="temp_right">
-														<p>{{item.projectName}}</p>
-														<p>{{item.formatStartTime}}</p>
-														<p>{{item.title}}</p>
-														<p>{{item.stuffName}}</p>
-													</div>
-													<img v-bind:src="item.image" class="temp_word">
-												</div>
+											<div class="mall_img" v-for="(items,index) in item.itemTemp" :key='index' @click="customer()">
+												<img src="images/banner_3.png" />
+												<p>{{items.name}}</p>
 											</div>
 										</div>
 									</div>
@@ -63,18 +70,17 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</el-main>
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
 		</div>
 	</body>
-	<!-- import Vue before Element -->
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
-	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/project_index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/customer.js" type="text/javascript" charset="utf-8"></script>
+
 </html>

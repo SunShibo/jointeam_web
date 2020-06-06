@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>中竞集团</title>
+		<link rel="shortcut icon" href="images/logo.png" >
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
 		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -53,22 +54,22 @@
 							</div>
 
 							<div class="access">
-								<div class="access_list">
+								<a class="access_list" href="service.html">
 									<img src="images/icon_1.png">
 									<p>服务商城</p>
-								</div>
-								<div class="access_list">
+								</a>
+								<a class="access_list" href="customer.html">
 									<img src="images/icon_2.png">
 									<p>客户成功</p>
-								</div>
-								<div class="access_list">
+								</a>
+								<a class="access_list" href="policy.html">
 									<img src="images/icon_3.png">
 									<p>政策解读</p>
-								</div>
-								<div class="access_list">
+								</a>
+								<a class="access_list" href="template.html">
 									<img src="images/icon_4.png">
 									<p>报告模板</p>
-								</div>
+								</a>
 							</div>
 							<!-- 服务商城 -->
 							<div class="titles_list">
@@ -76,12 +77,12 @@
 									<p>服务商城</p>
 									<p>Service mall</p>
 								</div>
-								<div class="most">
+								<a class="most" href="service.html">
 									<p>查看更多</p>
 									<div class="most_img">
 										<img src="images/right_1.png">
 									</div>
-								</div>
+								</a>
 							</div>
 
 							<div class="mall">
@@ -98,7 +99,7 @@
 											<div class="mall_right">
 												<p class="mall_title">{{items.title}}</p>
 												<p class="mall_content">{{items.content}}</p>
-												<a href="" class="mall_href">查看详情</a>
+												<div class="mall_href" @click="mallDetails()">查看详情</div>
 											</div>
 										</div>
 									</div>

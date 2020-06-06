@@ -16,6 +16,9 @@ new Vue({
 		};
 	},
 	methods: {
+		mallDetails(){
+			window.location.href = 'mallDetails.html'
+		},
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},

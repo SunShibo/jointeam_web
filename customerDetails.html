@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>中竞集团</title>
+		<!-- import CSS -->
+		<link rel="shortcut icon" href="images/logo.png" >
+		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/customerDetails.css" />
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<el-container>
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="1">
+							<a href="index.html">首页</a>
+						</el-menu-item>
+						<el-menu-item index="2">
+							<a href="management.html">消息管理</a>
+						</el-menu-item>
+						<el-menu-item index="3">
+							<a href="aboutUs.html">关于我们</a>
+						</el-menu-item>
+						<el-menu-item index="4">
+							<a href="template.html">下载模板</a>
+						</el-menu-item>
+						<el-menu-item index="5">
+							<a href="project_index.html">我的项目</a>
+						</el-menu-item>
+						<el-menu-item index="6">
+							<a href="personalCenter.html">个人中心</a>
+						</el-menu-item>
+					</el-menu>
+				</el-header>
+				<el-main>
+					<div class="headImg">
+						<img src="images/banner_3.png" />
+					</div>
+
+					<div class="container">
+						<div class="content">
+							<div class="mall_l">
+								<div class="mall_t">
+									<p class="mall_title">项目介绍</p>
+									<p class="mall_cont">对企业（单位）的能源活动、工业生产过程等进行现场核查，准确识别二氧化碳排放边界及排放源，核证相关活动水平及排放因子数据，核算企业真实、客观的二氧化碳排放数据，出具有公信力的第三方核查/盘查报告，为企业(单位)碳排放履约和节能减碳工作提供支撑。</p>
+								</div>
+
+								<div class="mall_t mall_C">
+									<p class="mall_title">成功效果</p>
+									<p class="mall_cont">对企业（单位）的能源活动、工业生产过程等进行现场核查，准确识别二氧化碳排放边界及排放源，核证相关活动水平及排放因子数据，核算企业真实、客观的二氧化碳排放数据，出具有公信力的第三方核查/盘查报告，为企业(单位)碳排放履约和节能减碳工作提供支撑。</p>
+								</div>
+
+								<div class="mall_C">
+									<p class="mall_title">客户评价</p>
+									<div class="evaluate">
+										<div class="evaluate_list" v-for="item in 3" :key="item">
+											<img src="images/my.png" class="eval_headImg" />
+											<div class="eval_cont">
+												<div class="eval_t">
+													<p class="eval_name">是安徽省</p>
+													<p class="eval_time">02-05 14:11:52</p>
+												</div>
+												<el-rate v-model="value" disabled class="eval_Rate"></el-rate>
+												<p class="eval_c">书店哈斯uodaiosudoaisu</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="industry_right">
+								<div class="mall_titles">
+									<div class="mall_line"></div>
+									<p>其他服务</p>
+								</div>
+								<div class="industry_list" v-for="item in 3" :key="item">
+									<div class="list_img">
+										<img src="images/banner_3.png">
+									</div>
+									<div class="list_cont">
+										<p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
+										<p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</el-main>
+				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
+			</el-container>
+		</div>
+	</body>
+	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<!-- import Vue before Element -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<script src="js/customerDetails.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

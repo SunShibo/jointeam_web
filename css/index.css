@@ -70,12 +70,13 @@
 }
 
 .most {
+	text-decoration: none;
 	display: flex;
 	width: 100px;
 	height: 36px;
 	line-height: 36px;
 	background: rgba(255, 255, 255, 1);
-	border: 1px solid rgba(235, 236, 242, 1);
+	border: 1px solid rgba(235, 236, 242, 1);\
 }
 
 .most p {
@@ -106,6 +107,7 @@
 }
 
 .access_list {
+	text-decoration: none;
 	margin-right: 48px;
 	width: 258px;
 	height: 218px;
@@ -175,6 +177,7 @@
 .mall_cont {
 	display: flex;
 	margin-bottom: 24px;
+	cursor: pointer;
 }
 
 .mall_img {
@@ -310,10 +313,14 @@
 
 .industry_list {
 	display: flex;
+	cursor: pointer;
 }
 
 .industry_list:nth-child(2) {
 	margin: 24px 0;
+}
+.industry_list:hover .list_title{
+	color: #3F58BE;
 }
 
 .list_img {
