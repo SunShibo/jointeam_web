@@ -189,6 +189,9 @@
 }
 
 .mall_right {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	margin-left: 24px;
 }
 

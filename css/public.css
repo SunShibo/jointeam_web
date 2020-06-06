@@ -1,3 +1,7 @@
+[v-cloak] {
+	display: none;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -33,7 +37,8 @@ body {
 .el-menu.el-menu--horizontal {
 	border-bottom: none;
 }
-.el-menu-item *{
+
+.el-menu-item * {
 	text-decoration: none;
 	display: block;
 }

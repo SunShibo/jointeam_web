@@ -46,7 +46,7 @@ new Vue({
 						that.industry = res.data.data.industry.list;
 						that.serve = res.data.data.serve;
 						if(that.serve.length > 3){
-							$('.cont_container').css('width','80%');
+							$('.mall').css('width','1174px');
 						}
 						
 					} else {
