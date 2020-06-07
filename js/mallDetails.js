@@ -1,23 +1,120 @@
 new Vue({
-	data(){
-		return{
+	data() {
+		return {
 			activeIndex: '2',
-			introd:[
-				{name:'国家高新技术企业、中关村高新技术企业'},
-				{name:'工程咨询资质'},
-				{name:'建筑机电安装工程专业承包资质'},
-				{name:'电子与智能化工程专业承包资质'},
-				{name:'中央国家机关工程定点实施单位（机电工程）'},
-				{name:'国家发改委、财政部、工信部首批备案节能服务公司'},
-				{name:'国家发改委、财政部首批备案的合同能源管理节能服务公司'},
-				{name:'工信部首批推荐的工业和通信业合同能源管理节能服务公司'},
-				{name:'全国工业领域电力需求侧管理第一批服务机构'}
-			]
+			query: {},
+			introd: [],
+			records:[]
 		}
 	},
-	methods:{
+	methods: {
 		handleSelect(key, keyPath) {
-//			console.log(key, keyPath);
+			//			console.log(key, keyPath);
+		},
+		queryDetails() {
+			var ids = getQueryString('id');
+			var that = this;
+			axios.post(url + '/server/queryDetails', {
+					id: ids
+				})
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.query = res.data.data;
+						var arr = [];
+						str = that.query.serveUnit; //这是一字符串 
+						var strs = new Array(); //定义一数组 
+						strs = str.split(","); //字符分割 
+						for(i = 0; i < strs.length; i++) {
+							arr.push(strs[i])
+						}
+						that.introd = arr;
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		recos(id){
+			var that = this;
+			axios.post(url + '/server/queryDetails', {
+					id: id
+				})
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.query = res.data.data;
+						var arr = [];
+						str = that.query.serveUnit; //这是一字符串 
+						var strs = new Array(); //定义一数组 
+						strs = str.split(","); //字符分割 
+						for(i = 0; i < strs.length; i++) {
+							arr.push(strs[i])
+						}
+						that.introd = arr;
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		queryTypes() {
+			var that = this;
+			axios.post(url + '/server/queryTypes')
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+//						that.template = res.data.data;
+						let temp = res.data.data;
+						let arr = [];
+						temp.forEach(function(item,index){
+							var childs = item.child;
+							childs.forEach(function(items,index){
+								arr.push(items.id)
+							})
+						})
+						that.querys(arr[0])
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		querys(id) {
+			var that = this;
+			axios.post(url + '/server/query', {
+					typeId: id,
+					pageSize: 4,
+					pageNo: 1
+				})
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.records = res.data.data.records;
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 		}
+	},
+	mounted() {
+		this.queryDetails();
+		this.queryTypes();
 	}
 }).$mount('#app')
+
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if(r != null) return unescape(r[2]);
+	return null;
+}

@@ -290,12 +290,8 @@ img {
 
 .industry_list {
 	display: flex;
+	margin-bottom: 24px;
 }
-
-.industry_list:nth-child(2) {
-	margin: 24px 0;
-}
-
 .list_img {
 	width: 192px;
 	height: 126px;

@@ -51,18 +51,18 @@
 								<div class="cont_card_left">
 									<p class="card_title">顾客成功</p>
 									<div class="card_list">
-										<div class="card_list_left" v-for="(item,index) in card" :key="index">
-											<p>{{item.name}}</p>
+										<div class="card_list_left" v-for="(item,index) in template" :key="index" @click="querys(item,index)" :class="{light_greycolor:index == num}">
+											<p>{{item.typeName}}</p>
 											<img src="images/right_1.png" class="card_img">
 										</div>
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index">
+									<div class="cards_t"v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
-											<div class="mall_img" v-for="(items,index) in item.itemTemp" :key='index' @click="customer()">
-												<img src="images/banner_3.png" />
-												<p>{{items.name}}</p>
+											<div class="mall_img" v-for="(items,index) in records" :key='index' @click="customer()">
+												<img :src="items.image" />
+												<p>{{items.projectName}}</p>
 											</div>
 										</div>
 									</div>
@@ -77,6 +77,8 @@
 		</div>
 	</body>
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
 	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->

@@ -37,25 +37,25 @@
 								<div class="cont_card_left">
 									<p class="card_title">服务商城</p>
 									<div class="card_list">
-										<div class="card_list_left" v-for="(item,index) in card" :key="index">
-											<p>{{item.name}}</p>
+										<div class="card_list_left" v-for="(item,index) in template" :key="index" @click="querys(item,index)" :class="{light_greycolor:index == num}">
+											<p>{{item.typeName}}</p>
 											<img src="images/right_1.png" class="card_img">
 										</div>
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index">
+									<div class="cards_t" v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
-											<div class="card_mall" v-for="(items,index) in item.itemTemp" :key='index'>
+											<div class="card_mall" v-for="(items,index) in item.child" :key='index'>
 												<div class="mall_titles" >
 													<div class="mall_line"></div>
-													<p>{{items.name}}</p>
+													<p>{{items.typeName}}</p>
 												</div>
 												<div class="service_mall">
-													<div class="mall_img" v-for="(tepitems,index) in items.temp" :key="index" @click="mallDetails()">
+													<div class="mall_img" v-for="(itemList,index) in records" :key="index" @click="mallDetails(itemList.id)">
 														<div class="mall_contImg">
-															<img src="images/banner_3.png"/>
-															<p>{{tepitems.name}}</p>
+															<img :src="itemList.image"/>
+															<p>{{itemList.title}}</p>
 														</div>
 	
 													</div>
@@ -78,6 +78,8 @@
 	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
 	<script src="js/service.js" type="text/javascript" charset="utf-8"></script>
 </html>

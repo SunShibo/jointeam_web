@@ -61,6 +61,9 @@ img {
 	font-weight: 400;
 	color: #696C7F;
 }
+.mall_cont p{
+	margin: 0;
+}
 
 .mall_c {
 	margin-top: 32px;
@@ -154,6 +157,7 @@ img {
 .list_cos {
 	margin: 0;
 	font-size: 14px;
+	height: 52px;
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #696C7F;

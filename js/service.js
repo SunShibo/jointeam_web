@@ -3,151 +3,104 @@ var cont = new Vue({
 	data() {
 		return {
 			activeIndex: '2',
-			card: [{
-					name: '节能'
-				},
-				{
-					name: '环境'
-				},
-				{
-					name: '新能源'
-				},
-				{
-					name: '卫生健康'
-				}
-			],
-			template: [{
-				name:'节能',
-				itemTemp:[
-					{name:'多好速度',temp:[
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'是滴是滴',temp:[
-						{name:'发的'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'认为',temp:[
-						{name:'发送'},
-						{name:'打哈哈'}
-					]},
-					{name:'二位',temp:[
-						{name:'辅导费'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]}
-				]
-			},{
-				name:'环境',
-				itemTemp:[
-					{name:'多好速度',temp:[
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'是滴是滴',temp:[
-						{name:'发的'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'认为',temp:[
-						{name:'发送'},
-						{name:'打哈哈'}
-					]},
-					{name:'二位',temp:[
-						{name:'辅导费'},
-						{name:'df'},
-						{name:'打哈哈'}
-					]}
-				]
-			},{
-				name:'新能源',
-				itemTemp:[
-					{name:'多好速度',temp:[
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'是滴是滴',temp:[
-						{name:'发的'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'认为',temp:[
-						{name:'发送'},
-						{name:'dsf'}
-					]},
-					{name:'二位',temp:[
-						{name:'辅导费'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]}
-				]
-			},{
-				name:'卫生健康',
-				itemTemp:[
-				{name:'多好速度',temp:[
-						{name:'打哈哈'},
-						{name:'打哈哈'},
-						{name:'fdf'},
-						{name:'打哈哈'}
-					]},
-					{name:'是滴是滴',temp:[
-						{name:'发的'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]},
-					{name:'认为',temp:[
-						{name:'发送'},
-						{name:'打哈哈'}
-					]},
-					{name:'二位',temp:[
-						{name:'辅导费'},
-						{name:'打哈哈'},
-						{name:'打哈哈'}
-					]}
-				]
-			}]
+			template: [],
+			num: 0,
+			records:[]
 		}
 	},
 	methods: {
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		mallDetails(){
-			window.location.href = 'mallDetails.html'
+		mallDetails(id) {
+			window.location.href = 'mallDetails.html?id='+id
+		},
+		queryTypes() {
+			var that = this;
+			axios.post(url + '/server/queryTypes')
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.template = res.data.data;
+						that.mouth();
+						let temp = res.data.data;
+						let arr = [];
+						temp.forEach(function(item,index){
+							var childs = item.child;
+							childs.forEach(function(items,index){
+								arr.push(items.id)
+							}
+						})
+						that.query(arr[0],1)
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		query(id, index) {
+			var that = this;
+			that.num = index;
+			axios.post(url + '/server/query', {
+					typeId: id,
+					pageSize: 4,
+					pageNo: 1
+				})
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.records = res.data.data.records;
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		querys(items, index) {
+			var id = '';
+			var itemList = items.child;
+			itemList.forEach(function(item,index){
+				id = item.id;
+			})
+			console.log(itemList)
+			var that = this;
+			that.num = index;
+			axios.post(url + '/server/query', {
+					typeId: id,
+					pageSize: 4,
+					pageNo: 1
+				})
+				.then(function(res) {
+//					console.log(res);
+					if(res.data.success = true) {
+						that.records = res.data.data.records;
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		mouth() {
+			var that = this;
+			var temp = that.template;
+			var arr = [];
+			temp.forEach(function(item, index) {
+				let temps = item.child.length;
+				arr.push(temps);
+			})
+			var ma4 = Math.max.apply(null, arr);
+			//			console.log(ma4);
+			var height = 280 * ma4;
+			$('.card_temp').css('height',height);
 		}
+	},
+	mounted() {
+		this.queryTypes();
 	}
 }).$mount('#app')
-//var temps = '';
-var temp = cont.template;
-var arr = [];
-temp.forEach(function(item,index){
-	let temps = item.itemTemp.length;
-	arr.push(temps);
-})
-var ma4 = Math.max.apply(null,arr);
-console.log(ma4);
-var height = 280 * ma4;
-
-$('.card_temp').css('height', height)
-
-$('.card_list_left:first').addClass('light_greycolor');
-$('.card_img:first').attr('src', 'images/right_2.png');
-$('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
-
-$('.card_list_left').click(function() {
-	var index = $(this).index();
-	$(this).siblings('div').removeClass('light_greycolor'); // 删除其他兄弟元素的样式
-	$(this).addClass('light_greycolor');
-
-	$(this).find('img').attr('src', 'images/right_2.png');
-	$(this).siblings().find('img').attr('src', 'images/right_1.png');
-
-	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
-})
