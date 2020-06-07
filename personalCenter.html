@@ -1,167 +1,186 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>中竞集团</title>
-		<!-- import CSS -->
-		<link rel="shortcut icon" href="images/logo.png" >		
-		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="css/public.css" />
-		<link rel="stylesheet" type="text/css" href="css/personalCenter.css" />
-	</head>
-	<body>
-		<div id="app" v-cloak>
-			<el-container>
-				<el-header style="height: auto;">
-					<div class="logo">
-						<img src="images/logo.png">
-					</div>
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
-					</el-menu>
-				</el-header>
-				<el-main>
-					<div class="headImg">
-						<p class="headTitle">个人中心</p>
-						<p class="headText">Personal center</p>
-					</div>
+<head>
+    <meta charset="UTF-8">
+    <title>中竞集团</title>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/personalCenter.css"/>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="height: auto;">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
+                <el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
+                <el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
+                <el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
+                <el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
+                <el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+            </el-menu>
+        </el-header>
+        <el-main>
+            <div class="headImg">
+                <p class="headTitle">个人中心</p>
+                <p class="headText">Personal center</p>
+            </div>
 
-					<div class="container">
-						<div class="content">
-							<div class="card">
-								<div class="cont_card_left">
-									<p class="card_title">个人中心</p>
-									<div class="card_list">
-										<div class="card_list_left" v-for="(item,index) in card" :key="index">
-											<p>{{item.name}}</p>
-											<img src="images/right_1.png" class="card_img">
-										</div>
-									</div>
-								</div>
-								<div class="card_temp">
-									<div class="cards_t">
-										<el-form :model="form" class="cont_card_right">
-											<el-form-item>
-												<div class="personalHead">
-													<img v-if="form.head == ''||form.head == null" :src="imageUrl" class="avatar">
-													
-													<img v-else :src="form.head" class="avatar">
-													<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
-													 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-														<el-button size="small" type="primary">上传头像</el-button>
-													</el-upload>
-												</div>
-											</el-form-item>
-											<el-form-item>
-												<el-input placeholder="昵称" v-model="form.name"></el-input>
-											</el-form-item>
-											<el-form-item>
-												<el-input placeholder="手机号" v-model="form.phone" maxlength="11"></el-input>
-											</el-form-item>
-											<el-form-item>
-												<div class="perCode">
-													<el-input placeholder="验证码" v-model="form.vCode"></el-input>
-													<el-button v-if="isNo" @click="sendvCode">{{nowtime}}</el-button>
-													<el-button v-else >{{nowtime}}</el-button>
-												</div>
-											</el-form-item>
-											<el-form-item>
-												<el-input placeholder="邮箱" v-model="form.mailbox"></el-input>
-											</el-form-item>
-											<el-form-item>
-												<el-button type="primary" @click="onSubmit(form)" class="elButtn">
-													<img src="images/icon_t.png" alt="">
-													<span>提交</span>
-												</el-button>
-											</el-form-item>
-										</el-form>
-									</div>
-									<div class="cards_t">
-										<el-table :data="tableData" stripe style="width: 100%">
-											<el-table-column :show-overflow-tooltip="true" label="编号" prop="id" align="center" sortable width="50"></el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="name" label="姓名" width="180">
-											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="sex" label="性别" width="180">
-											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="position" label="部门" width="180">
-											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="department" label="岗位" width="180">
-											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="idCard" label="身份证号码" width="180">
-											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="comment" label="备注" width="180">
-											</el-table-column>
-										</el-table>
-										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
-										 :page-sizes="[100, 200, 300, 400]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
-										</el-pagination>
-									</div>
-									<div class="cards_t">
-										<div class="industry_right">
-											<div class="industry_list" v-for="item in 3" :key="item">
-												<div class="list_img">
-													<img src="images/banner_3.png">
-												</div> 
-												<div class="list_cont">
-													<p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
-													<p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
-													<div class="industry_cont">
-														<div class="industry_icon">
-															<img src="images/time.png">
-														</div>
-														<p>05/14 13:23:12</p>
-														<p>来源：中国科技网</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
-										 :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400">
-										</el-pagination>
-									</div>
+            <div class="container">
+                <div class="content">
+                    <div class="card">
+                        <div class="cont_card_left">
+                            <p class="card_title">个人中心</p>
+                            <div class="card_list">
+                                <div class="card_list_left" v-for="(item,index) in card" :key="index">
+                                    <p>{{item.name}}</p>
+                                    <img src="images/right_1.png" class="card_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card_temp">
+                            <div class="cards_t">
+                                <el-form :model="form" class="cont_card_right">
+                                    <el-form-item>
+                                        <div class="personalHead">
+                                            <img v-if="!form.head" :src="imageUrl"
+                                                 class="avatar"/>
+
+                                            <img v-else :src="form.head" class="avatar"/>
+                                            <el-upload class="avatar-uploader"
+                                                       ref="upload"
+                                                       action=""
+                                                       :show-file-list="false"
+                                                       :http-request="handleHttpRequest">
+                                                <el-button size="small" type="primary">上传头像</el-button>
+                                            </el-upload>
+                                        </div>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-input placeholder="昵称" v-model="form.name"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-input placeholder="手机号" v-model="form.phone" maxlength="11"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <div class="perCode">
+                                            <el-input placeholder="验证码" v-model="form.vCode"></el-input>
+                                            <el-button v-if="isNo" @click="sendvCode">{{nowtime}}</el-button>
+                                            <el-button v-else>{{nowtime}}</el-button>
+                                        </div>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-input placeholder="邮箱" v-model="form.mailbox"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="onSubmit(form)" class="elButtn">
+                                            <img src="images/icon_t.png" alt="">
+                                            <span>提交</span>
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
+                            <div class="cards_t">
+                                <el-table :data="tableData" stripe style="width: 100%">
+                                    <el-table-column :show-overflow-tooltip="true" label="编号" prop="id" align="center"
+                                                     sortable width="50"></el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="name" label="姓名" width="180">
+                                    </el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="sex" label="性别" width="180">
+                                    </el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="position" label="部门"
+                                                     width="180">
+                                    </el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="department" label="岗位"
+                                                     width="180">
+                                    </el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="idCard" label="身份证号码"
+                                                     width="180">
+                                    </el-table-column>
+                                    <el-table-column :show-overflow-tooltip="true" prop="comment" label="备注"
+                                                     width="180">
+                                    </el-table-column>
+                                </el-table>
+                                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                               :current-page="currentPage"
+                                               :page-sizes="[100, 200, 300, 400]" :page-size="pageSize"
+                                               layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
+                                </el-pagination>
+                            </div>
+                            <div class="cards_t">
+                                <div class="industry_right">
+                                    <div class="industry_list" v-for="item in 3" :key="item">
+                                        <div class="list_img">
+                                            <img src="images/banner_3.png">
+                                        </div>
+                                        <div class="list_cont">
+                                            <p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
+                                            <p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
+                                            <div class="industry_cont">
+                                                <div class="industry_icon">
+                                                    <img src="images/time.png">
+                                                </div>
+                                                <p>05/14 13:23:12</p>
+                                                <p>来源：中国科技网</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                               :current-page="currentPage"
+                                               :page-sizes="[100, 200, 300, 400]" :page-size="100"
+                                               layout="total, sizes, prev, pager, next, jumper" :total="400">
+                                </el-pagination>
+                            </div>
 
 
-									<div class="cards_t">
-										<el-form ref="fbForm" :model="ruleForm" class="demo-ruleForm">
-											<el-form-item prop="title" :rules="[{ required: true, message: '该项不能为空', trigger: 'blur'}]">
-												<p>标题：</p>
-												<el-input placeholder="请输入反馈标题" v-model="ruleForm.title"></el-input>
-											</el-form-item>
-											<el-form-item prop="content" :rules="[{ required: true, message: '该项不能为空', trigger: 'blur'}]">
-												<p>内容：</p>
-												<el-input type="textarea" placeholder="请输入反馈内容" v-model="ruleForm.content" maxlength="500" show-word-limit></el-input>
-											</el-form-item>
-											<el-form-item>
-												<el-button type="primary" @click="submitForm(ruleForm)" class="elButtn">
-													<img src="images/icon_t.png" alt="">
-													<span>提交</span>
-												</el-button>
-											</el-form-item>
-										</el-form>
-									</div>
+                            <div class="cards_t">
+                                <el-form ref="fbForm" :model="ruleForm" class="demo-ruleForm">
+                                    <el-form-item prop="title"
+                                                  :rules="[{ required: true, message: '该项不能为空', trigger: 'blur'}]">
+                                        <p>标题：</p>
+                                        <el-input placeholder="请输入反馈标题" v-model="ruleForm.title"></el-input>
+                                    </el-form-item>
+                                    <el-form-item prop="content"
+                                                  :rules="[{ required: true, message: '该项不能为空', trigger: 'blur'}]">
+                                        <p>内容：</p>
+                                        <el-input type="textarea" placeholder="请输入反馈内容" v-model="ruleForm.content"
+                                                  maxlength="500" show-word-limit></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="submitForm(ruleForm)" class="elButtn">
+                                            <img src="images/icon_t.png" alt="">
+                                            <span>提交</span>
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
 
-								</div>
-							</div>
-						</div>
-					</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-				</el-main>
-				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
-			</el-container>
-		</div>
-	</body>
-	<!-- import Vue before Element -->
-	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+        </el-main>
+        <el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
+    </el-container>
+</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
-	<!-- import JavaScript -->
-	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
-	<script src="js/personalCenter.js" type="text/javascript" charset="utf-8"></script>
+<!-- import Vue before Element -->
+<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+<script src="js/aliyun-oss-sdk.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/personalCenter.js" type="text/javascript" charset="utf-8"></script>
+</body>
 </html>

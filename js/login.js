@@ -41,23 +41,20 @@ var cont = new Vue({
 						password: password
 					})
 					.then(function(res) {
-						localStorage.setItem("cookie", document.cookie);
-						localStorage.setItem("information", JSON.stringify(res.data.data));
+						localStorage.setItem("cookie", `${res.data.data.cookie.name}=${res.data.data.cookie.value}`);
+						localStorage.setItem("information", JSON.stringify(res.data.data.user));
 
-						if(res.success = true) {
-							 window.location.href='./index.html'
-						} else {
-							alert(res.msg)
-						}
+						// if(res.success) {
+						// 	 window.location.href='./index.html'
+						// } else {
+						// 	alert(res.msg)
+						// }
 					})
 					.catch(function(error) {
 						console.log(error);
 					});
 			}
 		}
-	},
-	mounted: {
-
 	}
 }).$mount('#app')
 

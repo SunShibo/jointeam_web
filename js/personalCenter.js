@@ -1,3 +1,4 @@
+
 var cont = new Vue({
 	// el:'#app',
 	data() {
@@ -10,6 +11,7 @@ var cont = new Vue({
 				phone: '',
 				vCode: '',
 				mailbox: '',
+				head: ''
 			},
 			ruleForm: {
 				title: '',
@@ -47,23 +49,132 @@ var cont = new Vue({
 					name: '的热无若'
 				}
 			],
-			
+
 			alltime:60,
-			
+
 			nowtime:"发送验证码",
-			
+
 			isNo:true,
-			totalCount:""
+			totalCount:0,
+
+
+			region: 'oss-cn-beijing',
+			bucket: 'zjtc-bucket-01',
+			headers: { 'Content-Type': 'application/x-zip-compressed' },
+			uploadIndex: 0,
+
+			pageSize: 10,
+			dataObj: {},
+			expiration: ''
+
 		}
 	},
+	created() {
+		var vm = this;
+		axios({
+			url: url + '/sequence/getStsOss',
+			method: 'POST',
+			headers: {'Token': localStorage.getItem('cookie')}
+		}).then(function (res) {
+			if (res.data.success) {
+				console.log("response------",res.data)
+				vm.expiration = res.data.data.expiration;
+				vm.dataObj = {
+					region: vm.region,
+					bucket: vm.bucket,
+					accessKeyId: res.data.data.tempAk,
+					accessKeySecret: res.data.data.tempSk,
+					stsToken: res.data.data.token
+				};
+
+			}
+		})
+		// $.ajax({
+		// 	url: url + '/sequence/getStsOss',
+		// 	contentType: "application/json",
+		// 	dataType: "JSON",
+		// 	headers: {'Set-Cookie': localStorage.getItem('cookie')},
+		// 	type: "POST",
+		// 	success: function(res) {
+		// 		if (res.data.success) {
+		// 			debugger
+		// 			console.log(res.data)
+		// 			const { expiration, tempAk, tempSk, token } = res.data;
+		// 			vm.expiration = expiration;
+		// 			vm.dataObj = {
+		// 				region: vm.region,
+		// 				bucket: vm.bucket,
+		// 				accessKeyId: tempAk,
+		// 				accessKeySecret: tempSk,
+		// 				stsToken: token
+		// 			};
+		//
+		// 		}
+		// 	}
+		// })
+	},
 	methods: {
+
+
+		//上传oss方法
+		handleHttpRequest(option) {
+
+			let vm = this;
+			try {
+				console.log("try-------",vm.dataObj)
+				const client = Client(vm.dataObj),
+					file = option.file;
+
+				console.log(file)
+				//随机命名
+				const random_name = this.random_string(6) + '_' + new Date().getTime() + '.' + file.name.split('.').pop();
+				// 分片上传文件
+				client.multipartUpload(random_name, file, {
+					headers: vm.headers,
+					progress: async function(p) {
+						option.file.percent = p * 100;
+					}
+				}).then(({ res }) => {
+					if (res.statusCode === 200) {
+						//根据?截取前半部分地址
+						vm.form.head = res.requestUrls[0].split('?')[0];
+
+						vm.$refs.upload.clearFiles();
+					} else {
+						console.error('上传失败')
+						console.log("上传后失败 statusCode不等于200",res)
+					}
+				}).catch(error => {
+					console.error('上传失败')
+					console.log("上传后失败 直接失败",error)
+				});
+
+			} catch (error) {
+				console.error('上传失败')
+				console.log("上传后失败 try方法走到了catch中",error)
+			}
+
+		},
+
+		// 随机生成文件名
+		random_string(len) {
+			len = len || 32;
+			let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz12345678',
+				maxPos = chars.length,
+				pwd = '';
+			for (let i = 0; i < len; i++) {
+				pwd += chars.charAt(Math.floor(Math.random() * maxPos));
+			}
+			return pwd;
+		},
+
 		submitInfo(){
 			var that = this;
 			axios.post('https://hny.jointeam6.com/', {
 				"phone":that.form.phone
 			}).then(function(res) {
 					console.log(res);
-					if (res.success = true) {
+					if (res.data.success) {
 						that.nowtime = that.alltime;
 						var int = setInterval(()=>{
 							that.nowtime--;
@@ -83,14 +194,14 @@ var cont = new Vue({
 					console.log(error);
 				});
 		},
-		
+
 		sendvCode() {
 			var that = this;
 			axios.post('https://hny.jointeam6.com/user/send', {
 				"phone":that.form.phone
 			}).then(function(res) {
 					console.log(res);
-					if (res.success = true) {
+					if (res.data.success) {
 						that.nowtime = that.alltime;
 						var int = setInterval(()=>{
 							that.nowtime--;
@@ -177,22 +288,22 @@ var cont = new Vue({
 			});
 
 		},
-		
-		
+
+
 		handleSelectionChange(val) {
 			this.multipleSelection = val;
 		},
 		search() {
 			this.getData();
 		},
-		
+
 		showInput() {
 			this.inputVisible = true;
 			this.$nextTick(_ => {
 				this.$refs.saveTagInput.$refs.input.focus();
 			});
 		},
-		
+
 		handleInputConfirm() {
 			let inputValue = this.inputValue;
 			if (inputValue) {
@@ -201,7 +312,7 @@ var cont = new Vue({
 			this.inputVisible = false;
 			this.inputValue = '';
 		},
-		
+
 		// 每页显示的条数
 		handleSizeChange(val) {
 			// 改变每页显示的条数
