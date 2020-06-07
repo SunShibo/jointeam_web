@@ -86,7 +86,7 @@
 							</div>
 
 							<div class="mall">
-								<div class="mall_list" v-for="(item,index) in serve" :key='index'>
+								<div class="mall_list" v-for="(item,index) in serve" :key='index' v-if="index < 3">
 									<div class="mall_titles" >
 										<div class="mall_line"></div>
 										<p>{{item.typeName}}</p>

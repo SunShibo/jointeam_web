@@ -26,7 +26,7 @@ new Vue({
 			var that = this;
 			axios.post(url + '/banner/selectAll')
 				.then(function(res) {
-//					console.log(res);
+					console.log(res);
 					if(res.success = true) {
 						that.bannerUrl = res.data.data;
 					} else {

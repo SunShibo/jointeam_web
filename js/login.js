@@ -10,7 +10,7 @@ var cont = new Vue({
 	},
 	methods: {
 		handleSelect(key, keyPath) {
-			console.log(key, keyPath);
+//			console.log(key, keyPath);
 		},
 		onSubmit() {
 			var phone = this.phone;
@@ -43,12 +43,12 @@ var cont = new Vue({
 					.then(function(res) {
 						localStorage.setItem("cookie", `${res.data.data.cookie.name}=${res.data.data.cookie.value}`);
 						localStorage.setItem("information", JSON.stringify(res.data.data.user));
-
-						// if(res.success) {
-						// 	 window.location.href='./index.html'
-						// } else {
-						// 	alert(res.msg)
-						// }
+//						console.log(res)
+						 if(res.data.success = true) {
+						 	 window.location.href='./index.html'
+						 } else {
+						 	alert(res.data.msg)
+						 }
 					})
 					.catch(function(error) {
 						console.log(error);

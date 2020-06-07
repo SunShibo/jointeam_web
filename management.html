@@ -31,40 +31,42 @@
 					</div>
 					<div class="container">
 						<div class="content">
-							<div class="cont_l">
+							<div class="cont_l" v-for="(item,index) in records" :key="index">
 								<div class="cont_head">
-									<p class="cont_title">研究报告称中国成为全球绿色能源发展的核心驱动者</p>
+									<p class="cont_title">{{item.title}}</p>
 									<div class="industry_cont">
 										<div class="industry_icon">
 											<img src="images/time.png">
 										</div>
-										<p class="in_text">05/14 13:23:12</p>
-										<p class="in_text_one">来源：中国科技网</p>
+										<p class="in_text">{{unixTimeToDateTime(item.updateTime)}}</p>
+										<p class="in_text_one">来源：{{item.source}}</p>
 									</div>
 								</div>
 								<div class="article">
-									<p>第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发展的核心驱动者和绿色能源技术进步的重要领导者。</p>
-									<img src="images/banner_3.png" >
+									<p>{{item.introduction}}</p>
+									<img :src="item.image" >
+									<p v-html="item.content"></p>
 								</div>
 							</div>
+							
 							<div class="industry_right">
 								<div class="mall_titles">
 									<div class="mall_line"></div>
 									<p>相关资讯</p>
 								</div>
-								<div class="industry_list" v-for="item in 3" :key="item">
+								<div class="industry_list" v-for="(item,index) in recordsList" :key="index" @click="politics(item.id)">
 									<div class="list_img">
-										<img src="images/banner_3.png">
+										<img :src="item.image">
 									</div>
 									<div class="list_cont">
-										<p class="list_title">研究报告称中国成为全球绿色能源发展的色能源发</p>
-										<p class="list_cos">第二届国际绿色能源发展大会16日在江苏省扬中市召开。从会上获悉，中国已成为全球绿色能源发成为全球成为全球</p>
+										<p class="list_title">{{item.title}}</p>
+										<p class="list_cos">{{item.introduction}}</p>
 										<div class="industry_cont">
 											<div class="industry_icon">
 												<img src="images/time.png">
 											</div>
-											<p class="in_text">05/14 13:23:12</p>
-											<p class="in_text_one">来源：中国科技网</p>
+											<p class="in_text">{{unixTimeToDateTime(item.updateTime)}}</p>
+											<p class="in_text_one">来源：{{item.source}}</p>
 										</div>
 									</div>
 								</div>
@@ -79,6 +81,9 @@
 	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
+	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
 	<script src="js/management.js" type="text/javascript" charset="utf-8"></script>
 </html>
