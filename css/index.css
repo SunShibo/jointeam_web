@@ -250,6 +250,7 @@
 
 .industry_left {
 	width: 576px;
+	cursor: pointer;
 }
 
 .industry_img {

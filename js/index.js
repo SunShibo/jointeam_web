@@ -9,13 +9,17 @@ new Vue({
 				image: '',
 				introduction: '',
 				source: '',
-				updateTime: ''
+				updateTime: '',
+				id:''
 			},
 			serve:[],
 			records:[]
 		};
 	},
 	methods: {
+		indust(id){
+			window.location.href = 'management.html?id='+id
+		},
 		mallDetails(id){
 			window.location.href = 'mallDetails.html?id='+id
 		},

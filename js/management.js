@@ -18,7 +18,7 @@ new Vue({
 				pageSize:1
 			})
 				.then(function(res) {
-					console.log(res);
+					// console.log(res);
 					if(res.data.success = true) {
 						that.records = res.data.data.records;
 					} else {
@@ -53,7 +53,29 @@ new Vue({
 				id:id
 			})
 				.then(function(res) {
-//					console.log(res);
+					// console.log(res); 
+					if(res.data.success = true) {
+						let record = res.data.data;
+						let records = that.records;
+						records.splice(0,records.length);
+						records.push(record);
+						console.log(that.records)
+					} else {
+						alert(res.data.msg)
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		},
+		queryDetails(){
+			var id = getQueryString('id');
+			var that = this;
+			axios.post(url + '/politics/selectPoliticsById',{
+				id:id
+			})
+				.then(function(res) {
+					// console.log(res); 
 					if(res.data.success = true) {
 						let record = res.data.data;
 						let records = that.records;
@@ -78,5 +100,13 @@ new Vue({
 	mounted(){
 		this.selectPoliticsList();
 		this.selectIndustryList();
+		this.queryDetails();
 	}
 }).$mount('#app')
+
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if(r != null) return unescape(r[2]);
+	return null;
+}

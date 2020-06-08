@@ -111,15 +111,15 @@
 									<p>行业资讯</p>
 									<p>Industry News</p>
 								</div>
-								<div class="most">
+								<a class="most" href="management.html">
 									<p>查看更多</p>
 									<div class="most_img">
 										<img src="images/right_1.png">
 									</div>
-								</div>
+								</a>
 							</div>
 							<div class="industry">
-								<div class="industry_left">
+								<div class="industry_left" @click="indust(industry.id)">
 									<div class="industry_img">
 										<img :src="industry.image">
 									</div>
@@ -135,7 +135,7 @@
 								</div>
 
 								<div class="industry_right">
-									<div class="industry_list" v-for="(item,index) in records" :key="index">
+									<div class="industry_list" v-for="(item,index) in records" :key="index" @click="indust(item.id)">
 										<div class="list_img">
 											<img :src="item.image">
 										</div>
