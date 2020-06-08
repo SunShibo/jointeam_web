@@ -18,7 +18,7 @@ new Vue({
 				pageSize:1
 			})
 				.then(function(res) {
-					// console.log(res);
+					console.log(res);
 					if(res.data.success = true) {
 						that.records = res.data.data.records;
 					} else {
@@ -75,7 +75,7 @@ new Vue({
 				id:id
 			})
 				.then(function(res) {
-					// console.log(res); 
+					console.log(res); 
 					if(res.data.success = true) {
 						let record = res.data.data;
 						let records = that.records;
@@ -98,9 +98,14 @@ new Vue({
 		}
 	},
 	mounted(){
-		this.selectPoliticsList();
 		this.selectIndustryList();
-		this.queryDetails();
+		var id = getQueryString('id');
+		if(id){
+			this.queryDetails();
+		}else{
+			this.selectPoliticsList();
+		}
+		
 	}
 }).$mount('#app')
 
