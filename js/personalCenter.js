@@ -1,4 +1,3 @@
-
 var cont = new Vue({
 	// el:'#app',
 	data() {
@@ -18,7 +17,11 @@ var cont = new Vue({
 				content: ''
 			},
 			tableData: [],
+			industryTableData: [],
+			//员工列表
 			currentPage: 1,
+			// 消息列表
+			industryCurrentPage: 1,
 			card: [{
 					name: '基本信息'
 				},
@@ -50,20 +53,25 @@ var cont = new Vue({
 				}
 			],
 
-			alltime:60,
+			alltime: 60,
 
-			nowtime:"发送验证码",
+			nowtime: "发送验证码",
 
-			isNo:true,
-			totalCount:0,
+			isNo: true,
+			totalCount: 0,
+			industryTotal: 0,
+
 
 
 			region: 'oss-cn-beijing',
 			bucket: 'zjtc-bucket-01',
-			headers: { 'Content-Type': 'application/x-zip-compressed' },
+			headers: {
+				'Content-Type': 'application/x-zip-compressed'
+			},
 			uploadIndex: 0,
 
 			pageSize: 10,
+			industryPageSize: 3,
 			dataObj: {},
 			expiration: ''
 
@@ -74,10 +82,12 @@ var cont = new Vue({
 		axios({
 			url: url + '/sequence/getStsOss',
 			method: 'POST',
-			headers: {'Token': localStorage.getItem('cookie')}
-		}).then(function (res) {
+			headers: {
+				'Token': localStorage.getItem('cookie')
+			}
+		}).then(function(res) {
 			if (res.data.success) {
-				console.log("response------",res.data)
+				console.log("response------", res.data)
 				vm.expiration = res.data.data.expiration;
 				vm.dataObj = {
 					region: vm.region,
@@ -89,39 +99,15 @@ var cont = new Vue({
 
 			}
 		})
-		// $.ajax({
-		// 	url: url + '/sequence/getStsOss',
-		// 	contentType: "application/json",
-		// 	dataType: "JSON",
-		// 	headers: {'Set-Cookie': localStorage.getItem('cookie')},
-		// 	type: "POST",
-		// 	success: function(res) {
-		// 		if (res.data.success) {
-		// 			debugger
-		// 			console.log(res.data)
-		// 			const { expiration, tempAk, tempSk, token } = res.data;
-		// 			vm.expiration = expiration;
-		// 			vm.dataObj = {
-		// 				region: vm.region,
-		// 				bucket: vm.bucket,
-		// 				accessKeyId: tempAk,
-		// 				accessKeySecret: tempSk,
-		// 				stsToken: token
-		// 			};
-		//
-		// 		}
-		// 	}
-		// })
 	},
 	methods: {
-
 
 		//上传oss方法
 		handleHttpRequest(option) {
 
 			let vm = this;
 			try {
-				console.log("try-------",vm.dataObj)
+				console.log("try-------", vm.dataObj)
 				const client = Client(vm.dataObj),
 					file = option.file;
 
@@ -134,7 +120,9 @@ var cont = new Vue({
 					progress: async function(p) {
 						option.file.percent = p * 100;
 					}
-				}).then(({ res }) => {
+				}).then(({
+					res
+				}) => {
 					if (res.statusCode === 200) {
 						//根据?截取前半部分地址
 						vm.form.head = res.requestUrls[0].split('?')[0];
@@ -142,16 +130,16 @@ var cont = new Vue({
 						vm.$refs.upload.clearFiles();
 					} else {
 						console.error('上传失败')
-						console.log("上传后失败 statusCode不等于200",res)
+						console.log("上传后失败 statusCode不等于200", res)
 					}
 				}).catch(error => {
 					console.error('上传失败')
-					console.log("上传后失败 直接失败",error)
+					console.log("上传后失败 直接失败", error)
 				});
 
 			} catch (error) {
 				console.error('上传失败')
-				console.log("上传后失败 try方法走到了catch中",error)
+				console.log("上传后失败 try方法走到了catch中", error)
 			}
 
 		},
@@ -168,24 +156,24 @@ var cont = new Vue({
 			return pwd;
 		},
 
-		submitInfo(){
+		submitInfo() {
 			var that = this;
 			axios.post('https://hny.jointeam6.com/', {
-				"phone":that.form.phone
-			}).then(function(res) {
+					"phone": that.form.phone
+				}).then(function(res) {
 					console.log(res);
 					if (res.data.success) {
 						that.nowtime = that.alltime;
-						var int = setInterval(()=>{
+						var int = setInterval(() => {
 							that.nowtime--;
-							if(that.nowtime <= 0){
+							if (that.nowtime <= 0) {
 								that.nowtime = "发送验证码";
 								int = window.clearInterval(int);
 								that.isNo = true;
-							}else{
+							} else {
 								that.isNo = false;
 							}
-						},1000);
+						}, 1000);
 					} else {
 						that.$message.error("短信发送失败,请稍后重试");
 					}
@@ -198,21 +186,21 @@ var cont = new Vue({
 		sendvCode() {
 			var that = this;
 			axios.post('https://hny.jointeam6.com/user/send', {
-				"phone":that.form.phone
-			}).then(function(res) {
+					"phone": that.form.phone
+				}).then(function(res) {
 					console.log(res);
 					if (res.data.success) {
 						that.nowtime = that.alltime;
-						var int = setInterval(()=>{
+						var int = setInterval(() => {
 							that.nowtime--;
-							if(that.nowtime <= 0){
+							if (that.nowtime <= 0) {
 								that.nowtime = "发送验证码";
 								int = window.clearInterval(int);
 								that.isNo = true;
-							}else{
+							} else {
 								that.isNo = false;
 							}
-						},1000);
+						}, 1000);
 					} else {
 						that.$message.error("短信发送失败,请稍后重试");
 					}
@@ -226,13 +214,49 @@ var cont = new Vue({
 			var that = this;
 			that.form = JSON.parse(localStorage.getItem("information"));
 		},
+		
+		formatDate(date) {
+			return formatTime(date)
+		},
+
+		//消息列表
+		getIndustryData() {
+			var that = this;
+			var userId = JSON.parse(localStorage.getItem("information")).id
+			axios({
+				url: url + '/inform/queryAll',
+				method: 'POST',
+				data: {
+					userId: userId,
+					pageSize: that.industryPageSize,
+					pageNo: that.industryCurrentPage
+				},
+				headers: {
+					'Token': localStorage.getItem('cookie')
+				}
+			}).then(function(res) {
+				console.log(res)
+				if (res.data.succes) {
+					that.industryTableData = res.data.data.records;
+					that.industryTotal = res.data.data.total;
+				}
+			})
+		},
 
 		getData() {
 			var that = this;
-			axios.post('https://hny.jointeam6.com/staffs/queryStaffs', {})
+			axios.post('https://hny.jointeam6.com/staffs/queryStaffs', {
+					pageSize: that.pageSize,
+					pageNo: that.currentPage
+				})
 				.then(function(res) {
 					console.log(res);
-					if (res.success = true) {} else {}
+					if (res.data.success) {
+						that.tableData = res.data.data.records;
+						that.totalCount = res.data.data.total;
+					} else {
+
+					}
 				})
 				.catch(function(error) {
 					console.log(error);
@@ -244,18 +268,6 @@ var cont = new Vue({
 		},
 		handleAvatarSuccess(res, file) {
 			this.imageUrl = URL.createObjectURL(file.raw);
-		},
-		beforeAvatarUpload(file) {
-			const fileTypes = [".jpg", ".png", ".jpeg"];
-			const isLt2M = file.size / 1024 / 1024 < 2;
-
-			if (!fileTypes) {
-				this.$message.error('上传头像图片只能是 JPG 格式!');
-			}
-			if (!isLt2M) {
-				this.$message.error('上传头像图片大小不能超过 2MB!');
-			}
-			return fileTypes && isLt2M;
 		},
 		onSubmit(form) {
 			console.log(form);
@@ -269,10 +281,9 @@ var cont = new Vue({
 							"title": ruleForm.title,
 							"userId": id,
 							"content": ruleForm.content
-						})
-						.then(function(res) {
+						}).then(function(res) {
 							console.log(res);
-							if (res.success = true) {
+							if (res.data.success) {
 								that.$message.success("反馈成功");
 								that.ruleForm = {};
 							} else {
@@ -317,42 +328,58 @@ var cont = new Vue({
 		handleSizeChange(val) {
 			// 改变每页显示的条数
 			this.PageSize = val;
-			// 点击每页显示的条数时，显示第一页
-			this.getData(val, 1);
 			// 注意：在改变每页显示的条数时，要将页码显示到第一页
 			this.currentPage = 1;
+			// 点击每页显示的条数时，显示第一页
+			this.getData();
 		},
 		// 显示第几页
 		handleCurrentChange(val) {
 			// 改变默认的页数
-			this.currentPage = val;
+			this.industryCurrentPage = val;
 			// 切换页码时，要获取每页显示的条数
-			this.getData(this.PageSize, val * this.pageSize);
+			this.getData();
 		},
-		handleSizeChange(val) {
-			console.log(`每页 ${val} 条`);
+		handleIndustrySizeChange(val) {
+			// 改变每页显示的条数
+			this.industryPageSize = val;
+			// 注意：在改变每页显示的条数时，要将页码显示到第一页
+			this.industryCurrentPage = 1;
+			// 点击每页显示的条数时，显示第一页
+			this.getIndustryData();
 		},
-		handleCurrentChange(val) {
-			console.log(`当前页: ${val}`);
+		handleIndustryCurrentChange(val) {
+			// 改变默认的页数
+			this.industryCurrentPage = val;
+			// 切换页码时，要获取每页显示的条数
+			this.getIndustryData();
 		}
 	},
 
 	mounted() {
-		this.getData();
 		this.setData();
 	}
 
 }).$mount('#app')
+
 var height = 138 * cont.card.length;
 $('.card_temp').css('height', height)
 
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src', 'images/right_2.png');
-$(
-	'.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
+$('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
 
 $('.card_list_left').click(function() {
 	var index = $(this).index();
+	console.log(index)
+	switch (index) {
+		case 1:
+			cont.getData();
+			break;
+		case 2:
+			cont.getIndustryData()
+			break;
+	}
 	$(this).siblings('div').removeClass('light_greycolor'); // 删除其他兄弟元素的样式
 	$(this).addClass('light_greycolor');
 
@@ -360,4 +387,5 @@ $('.card_list_left').click(function() {
 	$(this).siblings().find('img').attr('src', 'images/right_1.png');
 
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
+
 })
