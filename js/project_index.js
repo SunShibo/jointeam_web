@@ -3,6 +3,7 @@ var cont = new Vue({
 	data() {
 		return {
 			activeIndex: '5',
+			isLogin:false,
 			accomplishStatus: 'having',
 			card: [{
 					name: '进行中'
@@ -11,63 +12,72 @@ var cont = new Vue({
 					name: '已完成'
 				}
 			],
-			projectList: []
-			/*projectList: [
-				{projectId: 1, projectName: 'Low Cost Advertising', title: '技术现场勘查', stuffName: '负责人:张三', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/XAs5BG_1590898805161.png'},
-				{projectId: 2, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：李四', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/K6r5hX_1590898943734.jpg'},
-				{projectId: 3, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：王五', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/8CkdH4_1590899169530.jpg'},
-				{projectId: 4, projectName: 'Tips For Designing An', title: '技术现场勘查', stuffName: '负责人：赵柳', formatStartTime: '4月29日 星期三', image: 'http://zjtc-bucket-01.oss-cn-beijing.aliyuncs.com/wxapp/XAs5BG_1590898805161.png'}
-			]*/
+			 projectList: []
+			
 		}
 	},
 	methods: {
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		template_href(projectId) {
+		template_href(projectId,staffId) {
 			if (this.accomplishStatus = 'having') {
-				window.location.href = './project_list.html?projectId=' + projectId;
+				window.location.href = './project_list.html?projectId=' + projectId+"&staffId="+staffId;
 			} else {
 				window.location.href = './customerDetails.html?projectId=' + projectId;
 			}
 		},
 		initProject() {
-			var vm = this;
-			axios({
-					url: url + '/project/selectProjectByUserId',
-					method: 'POST',
-					data: {
-						pageNo: 1,
-						pageSize: 1000,
-						accomplishStatus: vm.accomplishStatus
-					},
-					headers: {
-						'Token': localStorage.getItem('cookie')
-					}
-				})
-				.then(function(response) {
-					if (response.data.success) {
-						console.log(response.data.data.records)
-						var projectArr = [];
-						for (var i = 0; i < response.data.data.records.length; i++) {
-							var project = response.data.data.records[i];
-							projectArr.push({
-								projectId: project.projectId,
-								projectName: project.projectName,
-								title: project.title,
-								stuffName: project.stuffName,
-								image: project.image,
-								formatStartTime: project.formatStartTime
-							});
+			var cookie =  localStorage.getItem('cookie');
+			if(cookie!=null && cookie.length){
+				this.isLogin = true;
+			}else{
+				this.isLogin = false;
+			}
+			
+			if(this.isLogin){
+				var vm = this;
+				axios({
+						url: url + '/project/selectProjectByUserId',
+						method: 'POST',
+						data: {
+							pageNo: 1,
+							pageSize: 1000,
+							accomplishStatus: vm.accomplishStatus
+						},
+						headers: {
+							'Token': cookie
 						}
-						vm.projectList = projectArr;
-					} else {
-						window.location.href = "./login.html";
-					}
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+					})
+					.then(function(response) {
+						if (response.data.success) {
+							console.log(response.data.data.records)
+							var projectArr = [];
+							for (var i = 0; i < response.data.data.records.length; i++) {
+								var project = response.data.data.records[i];
+								projectArr.push({
+									staffId:project.staffId,
+									projectId: project.projectId,
+									projectName: project.projectName,
+									title: project.title,
+									stuffName: project.stuffName,
+									image: project.image,
+									formatStartTime: project.formatStartTime
+								});
+							}
+							vm.projectList = projectArr;
+						} else {
+							window.location.href = "./login.html";
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			}else{
+				window.location.href = "./login.html";
+			}
+			
+			
 		}
 	}
 }).$mount('#app')

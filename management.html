@@ -22,7 +22,10 @@
 						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
 						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
 						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+						<el-menu-item index="6">
+							<a v-if="isLogin" href="personalCenter.html">个人中心</a>
+							<a v-else href="personalCenter.html">登录</a>
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>

@@ -16,13 +16,17 @@
 					<div class="logo">
 						<img src="images/logo.png">
 					</div>
+					
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
 						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
 						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
 						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
 						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+						<el-menu-item index="6">
+							<a v-if="isLogin" href="personalCenter.html">个人中心</a>
+							<a v-else href="login.html">登录</a>
+							</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>
@@ -47,7 +51,7 @@
 									<div class="cards_t" >
 										<div class="cont_card_right">
 											<div class="right_list" v-for="(item,index) in projectList" :key="index">
-												<div class="template_list" @click="template_href(item.projectId);">
+												<div class="template_list" @click="template_href(item.projectId,item.staffId);">
 													<div class="temp_right">
 														<p>{{item.projectName}}</p>
 														<p>{{item.formatStartTime}}</p>
@@ -71,9 +75,11 @@
 	</body>
 	<!-- import Vue before Element -->
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+	<script src="js/vue.js"></script>
 	<!-- import JavaScript -->
-	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<!-- <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script> -->
+	<script src="js/elementIndex.js"></script>
 	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/project_index.js" type="text/javascript" charset="utf-8"></script>

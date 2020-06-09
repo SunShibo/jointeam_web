@@ -55,6 +55,13 @@ var cont = new Vue({
 					});
 			}
 		}
+	},
+	
+	created(){
+		var cookie = localStorage.getItem('cookie');
+		if(cookie!=null && cookie.length){
+			window.location.href = "./index.html";
+		}
 	}
 }).$mount('#app')
 

@@ -22,7 +22,10 @@
 						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
 						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
 						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+						<el-menu-item index="6">
+							<a v-if="isLogin" href="personalCenter.html">个人中心</a>
+							<a v-else href="personalCenter.html">登录</a>
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>
@@ -37,21 +40,21 @@
 								<div class="cont_card_left">
 									<p class="card_title">报告模板</p>
 									<div class="card_list">
-										<div class="card_list_left" v-for="(item,index) in card" :key="index">
-											<p>{{item.name}}</p>
+										<div class="card_list_left"  @click="cutTab(index,item.typeId)"  :class="eIndex==index?'light_greycolor':''" v-for="(item,index) in card" :key="index">
+											<p>{{item.type}}</p>
 											<img src="images/right_1.png" class="card_img">
 										</div>
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index">
+									<div class="cards_t" >
 										<div class="cont_card_right">
-											<div class="right_list" v-for="(items,index) in itemTemp" :key="index">
+											<div class="right_list" v-for="(item,index) in template" :key="index">
 												<div class="template_list">
-													<img src="images/word_1.png" class="temp_word">
+													<img :src="item.image" class="temp_word">
 													<div class="temp_right">
-														<p class="temp_title">{{item.temp}}</p>
-														<div class="temp_preview">
+														<p class="temp_title">{{item.name}}</p>
+														<div class="temp_preview" @click="downloadFile(item.path)">
 															<img src="images/icon_yan.png" >
 															<p>预览</p>
 														</div>
@@ -71,9 +74,16 @@
 		</div>
 	</body>
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script> -->
+	<script src="js/elementIndex.js"></script>
+	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->
 	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
 	<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
 </html>

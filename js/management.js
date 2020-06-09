@@ -4,7 +4,8 @@ new Vue({
 		return {
 			activeIndex: '2',
 			records:[],
-			recordsList:[]
+			recordsList:[],
+			isLogin: false,
 		};
 	},
 	methods: {
@@ -30,6 +31,12 @@ new Vue({
 				});
 		},
 		selectIndustryList(){
+			var cookie = localStorage.getItem('cookie');
+			if(cookie!=null && cookie.length){
+				this.isLogin = true;
+			}else{
+				this.isLogin = false;
+			}
 			var that = this;
 			axios.post(url + '/industry/selectIndustryList',{
 				pageNo:1,

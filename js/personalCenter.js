@@ -235,11 +235,25 @@ var cont = new Vue({
 					'Token': localStorage.getItem('cookie')
 				}
 			}).then(function(res) {
-				console.log(res)
-				if (res.data.succes) {
-					that.industryTableData = res.data.data.records;
+				if (res.data.success) {
+					let tempList = [];
+					for (var i = 0; i < res.data.data.records.length; i++) {
+						let message = res.data.data.records[i];
+						tempList.push({
+							id:message.id,
+							userId:message.userId,
+							createTime:message.createTime,
+							content:message.content,
+							title:message.title,
+							isRead:message.isRead,
+							image:message.image
+							
+						});
+					}
+					that.industryTableData = tempList;
 					that.industryTotal = res.data.data.total;
 				}
+				
 			})
 		},
 
@@ -270,7 +284,25 @@ var cont = new Vue({
 			this.imageUrl = URL.createObjectURL(file.raw);
 		},
 		onSubmit(form) {
-			console.log(form);
+			var cookie = localStorage.getItem("cookie");
+			alert(cookie);
+			axios({
+				url:url+"/user/update",
+				method:"POST",
+				data:{
+				name: this.form.name,
+				mailbox: this.form.mailbox,
+				head: this.imageUrl,
+				phone: this.form.phone,
+				vCode: this.form.vCode}
+				,
+				headers: {
+				'Token': cookie,
+				'Content-Type': 'application/json'
+					}
+			}).then((res)=>{
+				alert(res.data.msg);
+			});
 		},
 		submitForm(ruleForm) {
 			var id = JSON.parse(localStorage.getItem("information")).id;

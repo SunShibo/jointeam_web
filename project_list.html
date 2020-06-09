@@ -31,24 +31,26 @@
 					<div class="container">
 						<div class="content">
 							<div class="project">
+								
 								<div class="project_low">
-									<p class="project_title">Low Cost Advertising</p>
+									<p class="project_title">{{progressList[0].projectName}}</p>
 									<p class="project_new">同步更新项目最新进度</p>
 								</div>
 								<div class="project_pro">
 									<div class="progress">
 										<div class="startTime">
 											<span>开始时间</span>
-											<p>2020-04-16</p>
+											<p>{{progressList[0].startFormatDate}}</p>
 										</div>
 										<div class="timePro">
-											<p>已完成46%</p>
+											<p>已完成{{progressList[0].percentage}}%</p>
 											<img src="images/group_3.png" >
 										</div>
 										<div class="startTime endTime">
 											<span>预计结束时间</span>
-											<p>2020-05-20</p>
+											<p>{{progressList[0].endFormatDate}}</p>
 										</div>
+										
 									</div>
 									<ul class="timeLine">
 										<li class="timeLine_list" v-for="item in progressList">
@@ -70,12 +72,12 @@
 									</ul>
 									<div class="service">
 										<div class="service_pop">
-											<img src="images/my.png" >
+											<img :src="staffBO.head" >
 											<div class="ser_pop">
-												<p class="ser_name">陈文华</p>
-												<p class="ser_text">公司：中竞集团</p>
-												<p class="ser_text">职位：客户部经理</p>
-												<p class="ser_text">电话：13052668470</p>
+												<p class="ser_name">{{staffBO.name}}</p>
+												<p class="ser_text">公司：{{staffBO.teamName}}</p>
+												<p class="ser_text">职位：{{staffBO.position}}</p>
+												<p class="ser_text">电话：{{staffBO.phone}}</p>
 											</div>
 										</div>
 										<img src="images/group_4.png" class="service_ser">
@@ -87,7 +89,7 @@
 							<div class="card_temp">
 								<div class="cont_card_right">
 									<div class="right_list" v-for="(item,index) in projectList" :key="index">
-										<div class="template_list" @click="template_href(item.projectId);">
+										<div class="template_list" @click="template_href(item.projectId,item.staffId);">
 											<div class="temp_right">
 												<p>{{item.projectName}}</p>
 												<p>{{item.formatStartTime}}</p>
@@ -110,7 +112,8 @@
 	<!-- import Vue before Element -->
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+	<!-- <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script> -->
+	<script src="js/elementIndex.js"></script>
 	<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/pulic.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>

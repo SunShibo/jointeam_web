@@ -4,6 +4,7 @@ new Vue({
 		return {
 			activeIndex: '1',
 			bannerUrl: [],
+			isLogin: false,
 			industry: {
 				title: '',
 				image: '',
@@ -38,6 +39,12 @@ new Vue({
 				});
 		},
 		loadData() {
+			var cookie = localStorage.getItem('cookie');
+			if(cookie!=null && cookie.length){
+				this.isLogin = true;
+			}else{
+				this.isLogin = false;
+			}
 			var that = this;
 			axios.post(url + '/main/meau')
 				.then(function(res) {
