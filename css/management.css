@@ -107,6 +107,8 @@ img {
 
 .industry_right {
 	margin-left: 80px;
+	height: 596px;
+	overflow: auto;
 }
 
 .industry_list {

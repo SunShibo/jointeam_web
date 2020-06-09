@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>中竞集团</title>
 		<!-- import CSS -->
-		<link rel="shortcut icon" href="images/logo.png" >		
+		<link rel="shortcut icon" href="images/logo.png">
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
 		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/service.css" />
@@ -46,21 +46,20 @@
 								<div class="card_temp">
 									<div class="cards_t" v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
-											<div class="card_mall" v-for="(itemList,index) in records" :key="index">
-												<div class="mall_titles" >
+											<div class="card_mall" v-for="(itemList,index) in item.child" :key="index">
+												<div class="mall_titles">
 													<div class="mall_line"></div>
-													<p>{{itemList.title}}</p>
+													<p>{{itemList.typeName}}</p>
 												</div>
 												<div class="service_mall">
-													<div class="mall_img"  @click="mallDetails(itemList.id)">
+													<div class="mall_img" v-for="(recordList,index) in records" v-if="itemList.id == recordList.typeId" :key="index" @click="mallDetails(recordList.id)">
 														<div class="mall_contImg">
-															<img :src="itemList.image"/>
-															<p>{{itemList.title}}</p>
+															<img :src="recordList.image" />
+															<p>{{recordList.title}}</p>
 														</div>
-	
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 									</div>

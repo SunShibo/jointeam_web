@@ -59,6 +59,7 @@ var cont = new Vue({
 								records.push(item);
 							})
 							that.records = records;
+							console.log(records)
 						} else {
 							alert(res.data.msg)
 						}
@@ -96,6 +97,8 @@ var cont = new Vue({
 								records.push(item);
 							})
 							that.records = records;
+							console.log(records)
+
 						} else {
 							alert(res.data.msg)
 						}
@@ -123,3 +126,15 @@ var cont = new Vue({
 		this.queryTypes();
 	}
 }).$mount('#app')
+
+
+var height =  $('.cards_t').height();
+$('.card_temp').css('height', height);
+
+$('.card_list_left').click(function() {
+	var heights = $('.cards_t').eq(index).height();
+	if(heights > height){
+		$('.card_temp').css('height', heights)
+	}
+})
+

@@ -58,7 +58,7 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t"v-for="(item,index) in template" :key="index" v-show="index == num">
+									<div class="cards_t" v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
 											<div class="mall_img" v-for="(items,index) in records" :key='index' @click="customer(items.id)">
 												<img :src="items.image" />

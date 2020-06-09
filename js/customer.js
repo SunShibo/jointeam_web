@@ -19,6 +19,7 @@ var cont = new Vue({
 //					console.log(res);
 					if(res.data.success = true) {
 						that.template = res.data.data;
+						that.mouth();
 						let temp = res.data.data;
 						let arr = [];
 						temp.forEach(function(item,index){
@@ -55,9 +56,33 @@ var cont = new Vue({
 		},
 		customer(id){
 			window.location.href = 'customerCont.html?id='+id
+		},
+		mouth(){
+			var that = this;
+			var temp = that.template;
+			var arr = [];
+			temp.forEach(function(item, index) {
+				let temps = item.child.length;
+				arr.push(temps);
+			})
+			var ma4 = Math.max.apply(null, arr);
+			//			console.log(ma4);
+			var height = 130 * ma4;
+			$('.card_temp').css('height', height);
 		}
 	},
 	mounted() {
 		this.queryTypes();
 	}
 }).$mount('#app')
+
+var height =  $('.cards_t').height();
+$('.card_temp').css('height', height);
+
+$('.card_list_left').click(function() {
+	var heights = $('.cards_t').eq(index).height();
+	if(heights > height){
+		$('.card_temp').css('height', heights)
+	}
+})
+

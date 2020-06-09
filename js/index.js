@@ -1,4 +1,4 @@
-new Vue({
+var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
@@ -10,28 +10,31 @@ new Vue({
 				introduction: '',
 				source: '',
 				updateTime: '',
-				id:''
+				id: ''
 			},
-			serve:[],
-			records:[]
+			pageNo: 1,
+			pageSize: 3,
+			serve: [],
+			records: [],
+			recordLength:[]
 		};
 	},
 	methods: {
-		indust(id){
-			window.location.href = 'management.html?id='+id
+		indust(id, status) {
+			window.location.href = 'management.html?id=' + id + '&status=' + status
 		},
-		mallDetails(id){
-			window.location.href = 'mallDetails.html?id='+id
+		mallDetails(id) {
+			window.location.href = 'mallDetails.html?id=' + id
 		},
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		loadBanner(){
+		loadBanner() {
 			var that = this;
 			axios.post(url + '/banner/selectAll')
 				.then(function(res) {
 					console.log(res);
-					if(res.success = true) {
+					if (res.success = true) {
 						that.bannerUrl = res.data.data;
 					} else {
 						alert(res.msg)
@@ -45,17 +48,17 @@ new Vue({
 			var that = this;
 			axios.post(url + '/main/meau')
 				.then(function(res) {
-//					console.log(res);
-					if(res.success = true) {
+					//					console.log(res);
+					if (res.success = true) {
 						let dataTime = res.data.data.industry.list.updateTime;
 						let times = that.unixTimeToDateTime(dataTime);
 						res.data.data.industry.list['updateTime'] = times;
 						that.industry = res.data.data.industry.list;
 						that.serve = res.data.data.serve;
-						if(that.serve.length > 3){
-							$('.mall').css('width','1174px');
+						if (that.serve.length > 3) {
+							$('.mall').css('width', '1174px');
 						}
-						
+
 					} else {
 						alert(res.msg)
 					}
@@ -64,18 +67,17 @@ new Vue({
 					console.log(error);
 				});
 		},
-		loadList(){
+		loadList() {
 			var that = this;
-			axios.post(url + '/industry/selectIndustryList',{
-				pageNo:'1',
-				pageSize:'3'
-			})
+			axios.post(url + '/industry/selectIndustryList', {
+					pageNo: that.pageNo,
+					pageSize: that.pageSize
+				})
 				.then(function(res) {
-//					console.log(res);
-					if(res.success = true) {
-//						var rec = res.data.data.records;
-						that.records = res.data.data.records;
-						
+					// console.log(res);
+					if (res.success = true) {
+						that.recordLength = res.data.data.records;
+						that.records = that.records.concat(res.data.data.records);
 					} else {
 						alert(res.msg)
 					}
@@ -98,3 +100,17 @@ new Vue({
 		this.loadList();
 	}
 }).$mount('#app')
+
+$('.industry_right').scroll(function() {
+	var $this = $(this),
+		viewH = $(this).height(), //可见高度
+		contentH = $(this).get(0).scrollHeight, //内容高度
+		scrollTop = $(this).scrollTop(); //滚动高度
+	if (scrollTop / (contentH - viewH) >= 0.95) { //当滚动到距离底部5%时
+		cont.pageNo++;
+		// 这里加载数据..
+		if (cont.records.length <= cont.pageSize & cont.recordLength.length != 0) {
+			cont.loadList();
+		}
+	}
+});

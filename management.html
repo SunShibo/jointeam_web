@@ -26,8 +26,8 @@
 					</el-menu>
 				</el-header>
 				<el-main>
-					<div class="headImg">
-						<img src="images/banner_3.png" lazy>
+					<div class="headImg" v-for="(item,index) in records" :key="index">
+						<img :src="item.image">
 					</div>
 					<div class="container">
 						<div class="content">
