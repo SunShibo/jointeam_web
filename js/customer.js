@@ -4,8 +4,8 @@ var cont = new Vue({
 		return {
 			activeIndex: '1',
 			template: [],
-            records:[]
-			
+            records:[],
+			num:0
 		}
 	},
 	methods: {
@@ -19,15 +19,13 @@ var cont = new Vue({
 //					console.log(res);
 					if(res.data.success = true) {
 						that.template = res.data.data;
+						that.mouth();
 						let temp = res.data.data;
 						let arr = [];
 						temp.forEach(function(item,index){
-							var childs = item.child;
-							childs.forEach(function(items,index){
-								arr.push(items.id)
-							})
+							arr.push(item.id)
 						})
-						that.query(arr[0],1)
+						that.query(arr[0],0);
 					} else {
 						alert(res.data.msg)
 					}
@@ -56,37 +54,35 @@ var cont = new Vue({
 					console.log(error);
 				});
 		},
-		querys(items, index) {
-			var id = '';
-			var itemList = items.child;
-			itemList.forEach(function(item,index){
-				id = item.id;
-			})
-			console.log(itemList)
-			var that = this;
-			that.num = index;
-			axios.post(url + '/client/queryAll', {
-					typeId: id,
-					pageSize: 4,
-					pageNo: 1
-				})
-				.then(function(res) {
-//					console.log(res);
-					if(res.data.success = true) {
-						that.records = res.data.data.records;
-					} else {
-						alert(res.data.msg)
-					}
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+		customer(id){
+			window.location.href = 'customerCont.html?id='+id
 		},
-		customer(){
-			window.location.href = 'customerDetails.html'
+		mouth(){
+			var that = this;
+			var temp = that.template;
+			var arr = [];
+			temp.forEach(function(item, index) {
+				let temps = item.child.length;
+				arr.push(temps);
+			})
+			var ma4 = Math.max.apply(null, arr);
+			//			console.log(ma4);
+			var height = 130 * ma4;
+			$('.card_temp').css('height', height);
 		}
 	},
 	mounted() {
 		this.queryTypes();
 	}
 }).$mount('#app')
+
+var height =  $('.cards_t').height();
+$('.card_temp').css('height', height);
+
+$('.card_list_left').click(function() {
+	var heights = $('.cards_t').eq(index).height();
+	if(heights > height){
+		$('.card_temp').css('height', heights)
+	}
+})
+

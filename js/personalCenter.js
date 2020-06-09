@@ -394,7 +394,10 @@ var cont = new Vue({
 
 }).$mount('#app')
 
-var height = 138 * cont.card.length;
+// var height = 138 * cont.card.length;
+ 
+ 
+var height =  $('.cards_t').height();
 $('.card_temp').css('height', height)
 
 $('.card_list_left:first').addClass('light_greycolor');
@@ -419,5 +422,8 @@ $('.card_list_left').click(function() {
 	$(this).siblings().find('img').attr('src', 'images/right_1.png');
 
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
-
+	var heights = $('.cards_t').eq(index).height();
+	if(heights > height){
+		$('.card_temp').css('height', heights)
+	}
 })

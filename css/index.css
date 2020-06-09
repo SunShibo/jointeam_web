@@ -47,7 +47,8 @@
 	display: flex;
 	margin-top: 80px;
 }
-.title_list{
+
+.title_list {
 	margin-top: 0;
 }
 
@@ -76,7 +77,8 @@
 	height: 36px;
 	line-height: 36px;
 	background: rgba(255, 255, 255, 1);
-	border: 1px solid rgba(235, 236, 242, 1);\
+	border: 1px solid rgba(235, 236, 242, 1);
+	\
 }
 
 .most p {
@@ -148,9 +150,10 @@
 	flex-wrap: wrap;
 }
 
-.mall_list{
+.mall_list {
 	width: 360px;
 }
+
 .mall_titles {
 	margin-bottom: 8px;
 	display: flex;
@@ -246,10 +249,13 @@
 
 .industry_right {
 	margin-left: 48px;
+	height: 442px;
+	overflow: auto;
 }
 
 .industry_left {
 	width: 576px;
+	cursor: pointer;
 }
 
 .industry_img {
@@ -314,12 +320,10 @@
 .industry_list {
 	display: flex;
 	cursor: pointer;
+	margin-bottom: 24px;
 }
 
-.industry_list:nth-child(2) {
-	margin: 24px 0;
-}
-.industry_list:hover .list_title{
+.industry_list:hover .list_title {
 	color: #3F58BE;
 }
 

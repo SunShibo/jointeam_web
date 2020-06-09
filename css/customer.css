@@ -113,7 +113,7 @@ img {
 
 .card_temp {
 	position: relative;
-	min-width: 832px;
+	width: 832px;
 }
 
 .cards_t {
@@ -123,7 +123,6 @@ img {
 	margin-bottom: 32px;
 	padding: 40px 40px 8px 40px;
 	width: 832px;
-	min-height: 620px;
 	/*display: none;*/
 }
 

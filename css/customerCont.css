@@ -1,17 +1,20 @@
+.el-main {
+	padding: 0;
+}
+
 img {
 	width: 100%;
 	height: 100%;
 }
 
-.el-main {
-	padding: 0;
-}
-
 .headImg {
 	width: 100%;
 	height: 480px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
-
 
 .container {
 	background: #FFFFFF;
@@ -28,87 +31,43 @@ img {
 .content {
 	margin: auto;
 	margin-top: 40px;
-	margin-bottom: 120px ;
+	margin-bottom: 120px;
 	display: flex;
 	justify-content: space-between;
 }
 
-.cont_l {
-	width: 696px;
+.mall_l {
+	width: 700px;
 }
 
-.cont_head {
+.mall_t {
 	border-bottom: 1px solid #EBECF2;
 }
 
-.cont_title {
+.mall_title {
 	margin: 0;
-	margin-bottom: 24px;
 	font-size: 30px;
 	font-family: PingFangSC-Medium, PingFang SC;
 	font-weight: 500;
 	color: #3E404B;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 1;
-	overflow: hidden;
 }
 
-.industry_cont {
-	display: flex;
-	margin-bottom: 16px;
-}
-
-.industry_icon {
-	margin: auto 0;
-	display: flex;
-	width: 14px;
-	height: 14px;
-}
-
-.industry_icon img {
-	width: 100%;
-	height: 100%;
-}
-
-.industry_cont p {
-	/* margin: 0; */
-	font-size: 12px;
-	font-family: PingFangSC-Regular, PingFang SC;
-	font-weight: 400;
-	color: #AEAFBA;
-}
-.in_text{
+.mall_cont {
 	margin: 0;
-	margin-left: 2px;
-}
-.in_text_one{
-	margin: 0;
-	margin-left: 12px;
-}
-.article {
-	margin-top: 32px;
-}
-
-.article p {
-	margin: 0;
+	margin-top: 24px;
+	margin-bottom: 32px;
 	font-size: 16px;
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
 	color: #696C7F;
 }
 
-.article img {
-	margin-top: 24px;
-	width: 100%;
-	height: 300px;
+.mall_C {
+	margin-top: 32px;
 }
 
-
 .industry_right {
-	margin-left: 80px;
-	height: 596px;
-	overflow: auto;
+	margin-left: 96px;
 }
 
 .industry_list {
@@ -117,7 +76,7 @@ img {
 	cursor: pointer;
 }
 
-.industry_list:nth-child{
+.industry_list:nth-child {
 	margin-bottom: 0;
 }
 
@@ -132,8 +91,11 @@ img {
 }
 
 .list_cont {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 	margin-left: 24px;
-	width: 240px;
+	width: 216px;
 }
 
 .list_title {
@@ -150,8 +112,6 @@ img {
 
 .list_cos {
 	margin: 0;
-	margin-top: 8px;
-	margin-bottom: 12px;
 	font-size: 14px;
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
@@ -161,6 +121,7 @@ img {
 	-webkit-line-clamp: 2;
 	overflow: hidden;
 }
+
 .mall_titles {
 	margin-bottom: 8px;
 	display: flex;

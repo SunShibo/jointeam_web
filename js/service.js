@@ -5,7 +5,7 @@ var cont = new Vue({
 			activeIndex: '2',
 			template: [],
 			num: 0,
-			records:[]
+			records: []
 		}
 	},
 	methods: {
@@ -13,25 +13,23 @@ var cont = new Vue({
 			console.log(key, keyPath);
 		},
 		mallDetails(id) {
-			window.location.href = 'mallDetails.html?id='+id
+			window.location.href = 'mallDetails.html?id=' + id
 		},
 		queryTypes() {
 			var that = this;
 			axios.post(url + '/server/queryTypes')
 				.then(function(res) {
-//					console.log(res);
-					if(res.data.success = true) {
+					console.log(res);
+					if (res.data.success = true) {
 						that.template = res.data.data;
 						that.mouth();
 						let temp = res.data.data;
 						let arr = [];
-						temp.forEach(function(item,index){
-							var childs = item.child;
-							childs.forEach(function(items,index){
-								arr.push(items.id)
-							}
+						let tempList = temp[0].child;
+						tempList.forEach(function(item, index) {
+							arr.push(item.id)
 						})
-						that.query(arr[0],1)
+						that.query(arr, 0)
 					} else {
 						alert(res.data.msg)
 					}
@@ -40,51 +38,75 @@ var cont = new Vue({
 					console.log(error);
 				});
 		},
-		query(id, index) {
+		query(ids, index) {
 			var that = this;
 			that.num = index;
-			axios.post(url + '/server/query', {
-					typeId: id,
-					pageSize: 4,
-					pageNo: 1
-				})
-				.then(function(res) {
-//					console.log(res);
-					if(res.data.success = true) {
-						that.records = res.data.data.records;
-					} else {
-						alert(res.data.msg)
-					}
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+
+			var queryList = ids;
+			var records = [];
+
+			queryList.forEach(function(item, index) {
+				axios.post(url + '/server/query', {
+						typeId: item,
+						pageSize: 4,
+						pageNo: 1
+					})
+					.then(function(res) {
+						// console.log(res);
+						if (res.data.success = true) {
+							var recordsList = res.data.data.records;
+							recordsList.forEach(function(item, index) {
+								records.push(item);
+							})
+							that.records = records;
+							console.log(records)
+						} else {
+							alert(res.data.msg)
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			})
+
 		},
 		querys(items, index) {
-			var id = '';
-			var itemList = items.child;
-			itemList.forEach(function(item,index){
-				id = item.id;
-			})
-			console.log(itemList)
+			var id = [];
 			var that = this;
+
+			var itemList = items.child;
+			itemList.forEach(function(item, index) {
+				id.push(item.id)
+			})
+			
 			that.num = index;
-			axios.post(url + '/server/query', {
-					typeId: id,
-					pageSize: 4,
-					pageNo: 1
-				})
-				.then(function(res) {
-//					console.log(res);
-					if(res.data.success = true) {
-						that.records = res.data.data.records;
-					} else {
-						alert(res.data.msg)
-					}
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+			var queryList = id;
+			var records = [];
+			
+			queryList.forEach(function(item, index) {
+				axios.post(url + '/server/query', {
+						typeId: item,
+						pageSize: 4,
+						pageNo: 1
+					})
+					.then(function(res) {
+						// console.log(res);
+						if (res.data.success = true) {
+							var recordsList = res.data.data.records;
+							recordsList.forEach(function(item, index) {
+								records.push(item);
+							})
+							that.records = records;
+							console.log(records)
+
+						} else {
+							alert(res.data.msg)
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			})
 		},
 		mouth() {
 			var that = this;
@@ -97,10 +119,22 @@ var cont = new Vue({
 			var ma4 = Math.max.apply(null, arr);
 			//			console.log(ma4);
 			var height = 280 * ma4;
-			$('.card_temp').css('height',height);
+			$('.card_temp').css('height', height);
 		}
 	},
 	mounted() {
 		this.queryTypes();
 	}
 }).$mount('#app')
+
+
+var height =  $('.cards_t').height();
+$('.card_temp').css('height', height);
+
+$('.card_list_left').click(function() {
+	var heights = $('.cards_t').eq(index).height();
+	if(heights > height){
+		$('.card_temp').css('height', heights)
+	}
+})
+

@@ -2,15 +2,23 @@ new Vue({
 	// el:'#app',
 	data() {
 		return {
+<<<<<<< .mine
 			activeIndex: '1',
 			politicsList:[],
 			pageNo:1,
 			pageSize:1000
+=======
+			activeIndex: '1',
+			currentPage: 1,
+
+
+>>>>>>> .theirs
 		};
 	},
 	methods: {
 		handleSelect(key, keyPath) {
 //			console.log(key, keyPath);
+<<<<<<< .mine
 		},
 	},
 	computed:{
@@ -22,6 +30,19 @@ new Vue({
 	},
 	getEnd(){
 		return this.politicsList.slice(4);
+=======
+		},
+		handleSizeChange(val) {
+			console.log(`每页 ${val} 条`);
+		},
+		handleCurrentChange(val) {
+			console.log(`当前页: ${val}`);
+		}
+
+
+
+
+>>>>>>> .theirs
 	}
 	}
 	,
