@@ -2,35 +2,30 @@ new Vue({
 	// el:'#app',
 	data() {
 		return {
-<<<<<<< .mine
 			activeIndex: '1',
-			politicsList:[],
-			pageNo:1,
-			pageSize:1000
-=======
+			politicsList: [],
+			pageNo: 1,
+			pageSize: 1000,
 			activeIndex: '1',
 			currentPage: 1,
 
 
->>>>>>> .theirs
 		};
 	},
 	methods: {
 		handleSelect(key, keyPath) {
-//			console.log(key, keyPath);
-<<<<<<< .mine
+			//			console.log(key, keyPath);
 		},
 	},
-	computed:{
-	getTop(){
-		return this.politicsList[0];
-	},
-	getThird(){
-		return this.politicsList.slice(1,4);
-	},
-	getEnd(){
-		return this.politicsList.slice(4);
-=======
+	computed: {
+		getTop() {
+			return this.politicsList[0];
+		},
+		getThird() {
+			return this.politicsList.slice(1, 4);
+		},
+		getEnd() {
+			return this.politicsList.slice(4);
 		},
 		handleSizeChange(val) {
 			console.log(`每页 ${val} 条`);
@@ -39,23 +34,16 @@ new Vue({
 			console.log(`当前页: ${val}`);
 		}
 
-
-
-
->>>>>>> .theirs
-	}
-	}
-	,
-	created(){
+	},
+	created() {
 		var that = this;
 		//politics/selectPoliticsList
-		axios.post(url+"/politics/selectPoliticsList",
-		{
-			pageNo:this.pageNo,
-			pageSize:this.pageSize
-		}).then((res)=>{
+		axios.post(url + "/politics/selectPoliticsList", {
+			pageNo: this.pageNo,
+			pageSize: this.pageSize
+		}).then((res) => {
 			let tempList = res.data.data.records;
-				
+
 			for (let i = 0; i < tempList.length; i++) {
 				//console.log(formatTime(tempList[i].updateTime));
 				tempList[i]["formatDate"] = formatTime(tempList[i].updateTime);
@@ -64,11 +52,11 @@ new Vue({
 			// 	item["formatDate"] = formatTime(item.updateTime);
 			// });
 			that.politicsList = tempList;
-			
-			
-			
+
+
+
 			//alert(typeof that.politicsList);
-			
+
 		});
 	}
 }).$mount('#app')
