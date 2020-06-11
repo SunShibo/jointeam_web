@@ -132,6 +132,8 @@ img {
 	justify-content: space-between;
 }
 
+
+
 .card_mall {
 	margin-bottom: 32px;
 	width: 100%;
@@ -158,6 +160,14 @@ img {
 	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #3E404B;
+}
+
+.mall_titles .seeMore{
+	position: absolute;
+	right:50px;
+	font-size: 13px;
+	color: #AEAFBA;	
+	font-weight: 500;
 }
 
 .service_mall {
@@ -197,3 +207,41 @@ img {
 .temps {
 	display: block;
 }
+
+.serverMoreDiv{
+	margin-top: 20px;
+	width: 862px;
+	/* height: 400px; */
+	border-radius: 4px;
+}
+
+ .transition-box {
+    margin-bottom: 10px;
+    width: 862px;
+	height: 100%;
+    border-radius: 4px;
+	
+ /* background-color: #409EFF; */
+  /*  text-align: center; */
+    color: #fff;
+  /*  padding: 40px 20px; */
+    box-sizing: border-box;
+   /* margin-right: 20px; */
+  }
+  
+  /* 
+  width: 184px;
+  margin-right: 32px;
+  cursor: pointer; */
+  
+  .seeMoreInfo{	
+	  margin-right: 26px;
+	  text-align: center;
+	  width: 184px;
+	  /* margin-right: 32px; */
+	  cursor: pointer;
+	  display: inline-block;
+	  color: black;
+  }
+  
+  

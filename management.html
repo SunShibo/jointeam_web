@@ -8,10 +8,18 @@
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
 		<link rel="stylesheet" type="text/css" href="css/public.css"/>
 		<link rel="stylesheet" type="text/css" href="css/management.css" />
+		
+		<script>
+		//声明_czc对象:
+		var _czc = _czc || [];
+		//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+		_czc.push(["_setAccount", "1278981857"]);
+		</script>
 	</head>
 	<body>
 		<div id="app" v-cloak>
 			<el-container>
+<<<<<<< HEAD
 				<div class="header">
 					<el-header style="height: auto;">
 						<div class="logo">
@@ -31,9 +39,39 @@
 					</el-header>
 				</div>
 				
+=======
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu  @select="bindTap" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="index.html" >
+						首页
+						</el-menu-item>
+						<el-menu-item index="management.html">
+							行业资讯
+						</el-menu-item>
+						<el-menu-item index="aboutUs.html">
+							关于我们
+						</el-menu-item>
+						<el-menu-item index="template.html">
+							下载模板
+						</el-menu-item>
+						<el-menu-item index="project_index.html">
+							我的项目
+						</el-menu-item>
+						<el-menu-item index="personalCenter.html" v-if="isLogin">
+							个人中心
+						</el-menu-item>
+						<el-menu-item index="login.html" v-else>
+							登录
+						</el-menu-item>
+					</el-menu>
+				</el-header>
+>>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 				<el-main>
-					<div class="headImg" v-for="(item,index) in records" :key="index">
-						<img :src="item.image">
+					<div class="headImg" >
+						<img src="images/mangementImage.jpg">
 					</div>
 					<div class="container">
 						<div class="content">
@@ -84,6 +122,10 @@
 			</el-container>
 		</div>
 	</body>
+	<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1278981857&web_id=1278981857"></script>
+	<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1278981857'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1278981857' type='text/javascript'%3E%3C/script%3E"));</script>
+	
+	
 	<!-- import Vue before Element -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- import JavaScript -->

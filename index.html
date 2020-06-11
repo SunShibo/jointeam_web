@@ -8,11 +8,19 @@
 		<link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
 		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<script>
+		//声明_czc对象:
+		var _czc = _czc || [];
+		//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+		_czc.push(["_setAccount", "1278981857"]);
+		</script>
+		
 	</head>
 
 	<body>
 		<div id="app" v-cloak>
 			<el-container>
+<<<<<<< HEAD
 				<div class="header">
 					<el-header style="height: auto;">
 						<div class="logo">
@@ -42,6 +50,37 @@
 					</el-header>
 				</div>
 				
+=======
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu @select="bindTap" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="index.html" >
+						首页
+						</el-menu-item>
+						<el-menu-item index="management.html">
+							行业资讯
+						</el-menu-item>
+						<el-menu-item index="aboutUs.html">
+							关于我们
+						</el-menu-item>
+						<el-menu-item index="template.html">
+							下载模板
+						</el-menu-item>
+						<el-menu-item index="project_index.html">
+							我的项目
+						</el-menu-item>
+						<el-menu-item index="personalCenter.html" v-if="isLogin">
+							个人中心
+						</el-menu-item>
+						<el-menu-item index="login.html" v-else>
+							登录
+						</el-menu-item>
+						
+					</el-menu>
+				</el-header>
+>>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 				<el-main>
 					<el-carousel :interval="5000" arrow="always">
 						<el-carousel-item v-for="(item,index) in bannerUrl" :key="index">
@@ -115,7 +154,7 @@
 									<p>行业资讯</p>
 									<p>Industry News</p>
 								</div>
-								<a class="most" href="management.html">
+								<a class="most" onclick="goManagement" href="#">
 									<p>查看更多</p>
 									<div class="most_img">
 										<img src="images/right_1.png">
@@ -138,7 +177,7 @@
 									</div>
 								</div>
 
-								<div class="industry_right">
+								<div class="industry_right" ref = "scrollDiv">
 									<div class="industry_list" v-for="(item,index) in records" :key="index" @click="indust(item.id,1)">
 										<div class="list_img">
 											<img :src="item.image">
@@ -166,6 +205,11 @@
 			</el-container>
 		</div>
 		<!-- import Vue before Element -->
+		<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1278981857&web_id=1278981857"></script>
+		<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1278981857'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1278981857' type='text/javascript'%3E%3C/script%3E"));</script>
+		
+		
+		
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>

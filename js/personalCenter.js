@@ -2,9 +2,10 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '6',
+			activeIndex: 'personalCenter.html',
 			imageUrl: 'images/my.png',
-
+			isLogin: false,
+			tempLists:[],
 			form: {
 				name: '',
 				phone: '',
@@ -78,6 +79,13 @@ var cont = new Vue({
 		}
 	},
 	created() {
+		var cookie = localStorage.getItem("cookie");
+		if (cookie != null && cookie.length) {
+			this.isLogin = true;
+		} else {
+			this.isLogin = false;
+		}
+
 		var vm = this;
 		axios({
 			url: url + '/sequence/getStsOss',
@@ -101,10 +109,58 @@ var cont = new Vue({
 		})
 	},
 	methods: {
+		bindTap(key, keyPath) {
+			
+			if (key === "signOut" && this.isLogin) {
+				var token = localStorage.getItem("cookie");
+				
+				axios({
+					url: url + "/user/backLogin",
+					method:"POST",
+					headers: {
+						'Token': token
+					}
+				}).then((res)=>{
+					if (res.data.success) {
+						localStorage.removeItem('cookie');
+						localStorage.removeItem('information');
+						localStorage.removeItem('strPhone');
+						alert(res.data.msg);
+						 window.location.href = "login.html";
+					}
+				});
 
+			}else{
+				 window.location.href = keyPath;
+			}
+			
+		},
+		upLoadSuccess(res){
+			var image = res.data;
+			this.form.head = image;
+		}
+		,
 		//上传oss方法
 		handleHttpRequest(option) {
-
+			//console.log(option.file);
+			
+			 var form = new FormData();
+			 form.append("file",option.file)
+			axios({
+				url:url+"/user/uploadHead",
+				method:"POST",
+				data:{
+					form
+				},
+				headers:{
+					"Token": localStorage.getItem("cookie"),
+					 //"Content-Type":"multipart/form-data"
+					//"Content-Type":"application/x-www-form-urlencoded"
+				}	
+			}).then((res)=>{
+				console.log("oss:"+res.data.msg);
+			});
+/* 
 			let vm = this;
 			try {
 				console.log("try-------", vm.dataObj)
@@ -140,7 +196,7 @@ var cont = new Vue({
 			} catch (error) {
 				console.error('上传失败')
 				console.log("上传后失败 try方法走到了catch中", error)
-			}
+			} */
 
 		},
 
@@ -214,7 +270,7 @@ var cont = new Vue({
 			var that = this;
 			that.form = JSON.parse(localStorage.getItem("information"));
 		},
-		
+
 		formatDate(date) {
 			return formatTime(date)
 		},
@@ -240,25 +296,26 @@ var cont = new Vue({
 					for (var i = 0; i < res.data.data.records.length; i++) {
 						let message = res.data.data.records[i];
 						tempList.push({
-							id:message.id,
-							userId:message.userId,
-							createTime:message.createTime,
-							content:message.content,
-							title:message.title,
-							isRead:message.isRead,
-							image:message.image
-							
+							id: message.id,
+							userId: message.userId,
+							createTime: message.createTime,
+							content: message.content,
+							title: message.title,
+							isRead: message.isRead,
+							image: message.image
+
 						});
 					}
 					that.industryTableData = tempList;
 					that.industryTotal = res.data.data.total;
 				}
-				
+
 			})
 		},
 
 		getData() {
 			var that = this;
+			
 			axios.post('https://hny.jointeam6.com/staffs/queryStaffs', {
 					pageSize: that.pageSize,
 					pageNo: that.currentPage
@@ -285,23 +342,34 @@ var cont = new Vue({
 		},
 		onSubmit(form) {
 			var cookie = localStorage.getItem("cookie");
-			alert(cookie);
+			var image = "";
+			if(this.form.head!="" && this.form.head.length>0){
+				image = this.form.head;
+			}else{
+				image = this.imageUrl;
+			}
 			axios({
-				url:url+"/user/update",
-				method:"POST",
-				data:{
-				name: this.form.name,
-				mailbox: this.form.mailbox,
-				head: this.imageUrl,
-				phone: this.form.phone,
-				vCode: this.form.vCode}
-				,
+				url: url + "/user/update",
+				method: "POST",
+				data: {
+					name: this.form.name,
+					mailbox: this.form.mailbox,
+					head: image,
+					phone: this.form.phone,
+					vCode: this.form.vCode
+				},
 				headers: {
-				'Token': cookie,
-				'Content-Type': 'application/json'
-					}
-			}).then((res)=>{
-				alert(res.data.msg);
+					'Token': cookie,
+					'Content-Type': 'application/json'
+				}
+			}).then((res) => {
+				var tempUserInfo = JSON.parse(localStorage.getItem("information"));
+				tempUserInfo.head = image;
+				localStorage.setItem("information",JSON.stringify(tempUserInfo));
+				
+				 this.$message({
+				            message: res.data.msg
+				          });
 			});
 		},
 		submitForm(ruleForm) {
@@ -394,6 +462,15 @@ var cont = new Vue({
 
 }).$mount('#app')
 
+<<<<<<< HEAD
+=======
+// var height = 138 * cont.card.length;
+
+
+var height = $('.cards_t').height();
+$('.card_temp').css('height', height)
+
+>>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src', 'images/right_2.png');
 $('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
@@ -415,9 +492,15 @@ $('.card_list_left').click(function() {
 	$(this).siblings().find('img').attr('src', 'images/right_1.png');
 
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
+<<<<<<< HEAD
 	var height = $('.cards_t').eq(index).height();
 	$('.card_temp').css('height', height)
 	if(height < 200){
 		$('.card_temp').css('height', height+400)
+=======
+	var heights = $('.cards_t').eq(index).height();
+	if (heights > height) {
+		$('.card_temp').css('height', heights)
+>>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 	}
 })

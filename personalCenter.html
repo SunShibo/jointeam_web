@@ -11,6 +11,7 @@
 	<body>
 		<div id="app" v-cloak>
 			<el-container>
+<<<<<<< HEAD
 				<div class="header">
 					<el-header style="height: auto;">
 						<div class="logo">
@@ -27,6 +28,36 @@
 					</el-header>
 				</div>
 				
+=======
+				<el-header style="height: auto;">
+					<div class="logo">
+						<img src="images/logo.png">
+					</div>
+					<el-menu @select="bindTap" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="index.html" >
+						首页
+						</el-menu-item>
+						<el-menu-item index="management.html">
+							行业资讯
+						</el-menu-item>
+						<el-menu-item index="aboutUs.html">
+							关于我们
+						</el-menu-item>
+						<el-menu-item index="template.html">
+							下载模板
+						</el-menu-item>
+						<el-menu-item index="project_index.html">
+							我的项目
+						</el-menu-item>
+						<el-menu-item index="signOut"  v-if="isLogin">
+							退出登录
+						</el-menu-item>
+						<el-menu-item index="login.html" v-else>
+							登录
+						</el-menu-item>
+					</el-menu>
+				</el-header>
+>>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 				<el-main>
 					<div class="headImg">
 						<p class="headTitle">个人中心</p>
@@ -68,9 +99,9 @@
 										<el-form :model="form" class="cont_card_right">
 											<el-form-item>
 												<div class="personalHead">
-													<img  :src="imageUrl" class="avatar" />
-													<!-- <img v-else :src="form.head" class="avatar" /> -->
-													<el-upload class="avatar-uploader" ref="upload" action="" :show-file-list="false" :http-request="handleHttpRequest">
+													<img  v-if = "form.head.length<=0" :src="imageUrl" class="avatar" />
+													<img v-else :src="form.head" class="avatar" />
+													<el-upload   class="avatar-uploader" ref="upload" action="https://hny.jointeam6.com/user/uploadHead" :on-success="upLoadSuccess" :show-file-list="false" >
 														<el-button size="small" type="primary">上传头像</el-button>
 													</el-upload>
 												</div>
@@ -110,8 +141,6 @@
 											</el-table-column>
 											<el-table-column :show-overflow-tooltip="true" prop="department" label="岗位">
 											</el-table-column>
-											<el-table-column :show-overflow-tooltip="true" prop="idCard" label="身份证号码">
-											</el-table-column>
 											<el-table-column :show-overflow-tooltip="true" prop="comment" label="备注">
 											</el-table-column>
 										</el-table>
@@ -124,6 +153,7 @@
 								
 									<div class="cards_t">
 										<div class="industry_right">
+											<div v-if="industryTableData.length>0">
 											<div class="industry_list" v-for="(item, index) in industryTableData" @click="industryItem(item.id)" :key="index">
 												<div class="list_img">
 													<img :src="item.image">
@@ -136,14 +166,20 @@
 															<img src="images/time.png">
 														</div>
 														<p>{{formatDate(item.createTime)}}</p>
-														<!-- <p>来源：中国科技网</p> -->
+														
 													</div>
 												</div>
 											</div>
+											<el-pagination @size-change="handleIndustrySizeChange" @current-change="handleIndustryCurrentChange" :current-page="industryCurrentPage"
+											 :page-sizes="[3]" :page-size="industryPageSize" layout="total, sizes, prev, pager, next, jumper" :total="industryTotal">
+											</el-pagination>
 										</div>
-										<el-pagination @size-change="handleIndustrySizeChange" @current-change="handleIndustryCurrentChange" :current-page="industryCurrentPage"
-										 :page-sizes="[3, 6, 9]" :page-size="industryPageSize" layout="total, sizes, prev, pager, next, jumper" :total="industryTotal">
-										</el-pagination>
+										<div style="text-align: center;line-height: 100px;" v-else>
+											<span>暂无消息</span>
+										</div>
+										</div>
+										
+										
 									</div>
 
 									<div class="cards_t">

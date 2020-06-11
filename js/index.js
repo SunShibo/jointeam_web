@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '1',
+			activeIndex: 'index.html',
 			bannerUrl: [],
 			isLogin: false,
 			industry: {
@@ -22,14 +22,24 @@ var cont = new Vue({
 	},
 	methods: {
 		indust(id, status) {
-			window.location.href = 'management.html?id=' + id + '&status=' + status
+		_czc.push(['_trackEvent', '资讯', '查看行业资讯', '资讯','1','news']);
+		window.location.href = 'management.html?id=' + id + '&status=' + status
 		},
+		goManagement(){
+			_czc.push(['_trackEvent', '资讯', '查看行业资讯', '资讯','1','news']);
+		window.location.href = 'management.html'	
+		}
+		,
 		mallDetails(id) {
 			window.location.href = 'mallDetails.html?id=' + id
 		},
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
+		}
+		,
 		loadBanner() {
 			var that = this;
 			axios.post(url + '/banner/selectAll')
@@ -105,6 +115,12 @@ var cont = new Vue({
 		this.loadBanner();
 		this.loadData();
 		this.loadList();
+		
+		
+		 this.$refs.scrollDiv.addEventListener("scroll",()=>{
+			 console.log(this.$refs.scrollDiv.scrollTop)
+				// console.log(1);
+		 });
 	}
 }).$mount('#app')
 
