@@ -80,9 +80,9 @@ var height =  $('.cards_t').height();
 $('.card_temp').css('height', height);
 
 $('.card_list_left').click(function() {
-	var heights = $('.cards_t').eq(index).height();
-	if(heights > height){
-		$('.card_temp').css('height', heights)
-	}
+	var height = $('.cards_t').eq(index).height();
+	$('.card_temp').css('height', height)
 })
+
+
 

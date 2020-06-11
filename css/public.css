@@ -11,17 +11,29 @@ body {
 .el-container.is-vertical {
 	min-width: 1200px;
 }
-
+.header{
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 8px 0;
+	background: #FFFFFF;
+}
 .el-header {
+	padding: 0;
+	margin: auto;
 	display: flex;
 	justify-content: space-between;
-	padding: 8px 132px;
-	background: #FFFFFF;
+	/* padding: 8px 132px;
+	background: #FFFFFF; */
 }
 
 .logo {
 	width: 104px;
 	height: 64px;
+	margin-right: 548px;
 }
 
 .logo img {

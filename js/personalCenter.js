@@ -264,7 +264,7 @@ var cont = new Vue({
 					pageNo: that.currentPage
 				})
 				.then(function(res) {
-					console.log(res);
+					// console.log(res);
 					if (res.data.success) {
 						that.tableData = res.data.data.records;
 						that.totalCount = res.data.data.total;
@@ -314,7 +314,7 @@ var cont = new Vue({
 							"userId": id,
 							"content": ruleForm.content
 						}).then(function(res) {
-							console.log(res);
+							// console.log(res);
 							if (res.data.success) {
 								that.$message.success("反馈成功");
 								that.ruleForm = {};
@@ -394,19 +394,12 @@ var cont = new Vue({
 
 }).$mount('#app')
 
-// var height = 138 * cont.card.length;
- 
- 
-var height =  $('.cards_t').height();
-$('.card_temp').css('height', height)
-
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src', 'images/right_2.png');
 $('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
 
 $('.card_list_left').click(function() {
 	var index = $(this).index();
-	console.log(index)
 	switch (index) {
 		case 1:
 			cont.getData();
@@ -422,8 +415,9 @@ $('.card_list_left').click(function() {
 	$(this).siblings().find('img').attr('src', 'images/right_1.png');
 
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
-	var heights = $('.cards_t').eq(index).height();
-	if(heights > height){
-		$('.card_temp').css('height', heights)
+	var height = $('.cards_t').eq(index).height();
+	$('.card_temp').css('height', height)
+	if(height < 200){
+		$('.card_temp').css('height', height+400)
 	}
 })

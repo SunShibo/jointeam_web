@@ -5,7 +5,8 @@ var cont = new Vue({
 			activeIndex: '2',
 			template: [],
 			num: 0,
-			records: []
+			records: [],
+			height_s:[]
 		}
 	},
 	methods: {
@@ -19,17 +20,21 @@ var cont = new Vue({
 			var that = this;
 			axios.post(url + '/server/queryTypes')
 				.then(function(res) {
-					console.log(res);
+					// console.log(res);
 					if (res.data.success = true) {
 						that.template = res.data.data;
-						that.mouth();
+						// that.mouth();
 						let temp = res.data.data;
 						let arr = [];
+						let height_h = [];
 						let tempList = temp[0].child;
 						tempList.forEach(function(item, index) {
-							arr.push(item.id)
+							arr.push(item.id);
+							height_h.push(item)
 						})
-						that.query(arr, 0)
+						that.height_s = height_h;
+						$('.card_temp').css('height', 280 * that.height_s.length);
+						that.query(arr, 0);
 					} else {
 						alert(res.data.msg)
 					}
@@ -59,7 +64,7 @@ var cont = new Vue({
 								records.push(item);
 							})
 							that.records = records;
-							console.log(records)
+							// console.log(records)
 						} else {
 							alert(res.data.msg)
 						}
@@ -78,10 +83,11 @@ var cont = new Vue({
 			itemList.forEach(function(item, index) {
 				id.push(item.id)
 			})
-			
+
 			that.num = index;
 			var queryList = id;
 			var records = [];
+			$('.card_temp').css('height', 280 * items.child.length);
 			
 			queryList.forEach(function(item, index) {
 				axios.post(url + '/server/query', {
@@ -97,8 +103,6 @@ var cont = new Vue({
 								records.push(item);
 							})
 							that.records = records;
-							console.log(records)
-
 						} else {
 							alert(res.data.msg)
 						}
@@ -107,34 +111,10 @@ var cont = new Vue({
 						console.log(error);
 					});
 			})
-		},
-		mouth() {
-			var that = this;
-			var temp = that.template;
-			var arr = [];
-			temp.forEach(function(item, index) {
-				let temps = item.child.length;
-				arr.push(temps);
-			})
-			var ma4 = Math.max.apply(null, arr);
-			//			console.log(ma4);
-			var height = 280 * ma4;
-			$('.card_temp').css('height', height);
 		}
 	},
 	mounted() {
 		this.queryTypes();
 	}
 }).$mount('#app')
-
-
-var height =  $('.cards_t').height();
-$('.card_temp').css('height', height);
-
-$('.card_list_left').click(function() {
-	var heights = $('.cards_t').eq(index).height();
-	if(heights > height){
-		$('.card_temp').css('height', heights)
-	}
-})
 

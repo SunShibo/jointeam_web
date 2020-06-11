@@ -12,19 +12,22 @@
 	<body>
 		<div id="app" v-cloak>
 			<el-container>
-				<el-header style="height: auto;">
-					<div class="logo">
-						<img src="images/logo.png">
-					</div>
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
-					</el-menu>
-				</el-header>
+				<div class="header">
+					<el-header style="height: auto;">
+						<div class="logo">
+							<img src="images/logo.png">
+						</div>
+						<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+							<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
+							<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
+							<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
+							<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
+							<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
+							<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+						</el-menu>
+					</el-header>
+				</div>
+				
 				<el-main>
 					<div class="headImg">
 						<p class="headTitle">服务商城</p>
