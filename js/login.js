@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '6',
+			activeIndex: 'login.html',
 			phone: '',
 			password: '',
 			checked: true
@@ -11,6 +11,8 @@ var cont = new Vue({
 	methods: {
 		handleSelect(key, keyPath) {
 //			console.log(key, keyPath);
+		},bindTap(key, keyPath){
+			window.location.href = keyPath;
 		},
 		onSubmit() {
 			var phone = this.phone;
@@ -31,11 +33,11 @@ var cont = new Vue({
 				var strPhone = phone;
 				var strPass = password;
 				localStorage.setItem('strPhone', strPhone);
-				if(this.checked == true) {
-					localStorage.setItem('strPass', strPass);
-				} else {
-					localStorage.removeItem('strPass');
-				}
+				// if(this.checked == true) {
+				// 	localStorage.setItem('strPass', strPass);
+				// } else {
+				// 	localStorage.removeItem('strPass');
+				// }
 				axios.post(url + '/user/loginByPwd', {
 						phone: phone,
 						password: password

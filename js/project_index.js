@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '5',
+			activeIndex: 'project_index.html',
 			isLogin:false,
 			accomplishStatus: 'having',
 			card: [{
@@ -19,6 +19,9 @@ var cont = new Vue({
 	methods: {
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
+		},
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
 		},
 		template_href(projectId,staffId) {
 			if (this.accomplishStatus = 'having') {

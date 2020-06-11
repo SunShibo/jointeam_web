@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '4',
+			activeIndex: 'template.html',
 			eIndex:0,
 			isLogin:false,
 			card:[
@@ -31,6 +31,10 @@ var cont = new Vue({
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
+		}
+		,
 		cutTab(index,typeId){
 			this.eIndex = index;
 			this.queryTemplateList(typeId);
@@ -61,6 +65,7 @@ var cont = new Vue({
 			});
 		},
 		downloadFile(path){
+			_czc.push(['_trackEvent', '模板', '下载模板', '下载模板','1','template']);
 			window.open(path);
 		}
 		,

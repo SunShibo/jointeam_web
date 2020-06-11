@@ -114,7 +114,6 @@ img {
 .card_temp{
 	position: relative;
 	width: 832px;
-
 }
 
 .cards_t{
@@ -124,12 +123,16 @@ img {
 	margin-bottom: 32px;
 	padding: 40px 40px 8px 40px;
 	width: 832px;
+	height: 350px;
+	overflow: auto;
 	
 }
 .cont_card_right {
+	
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	
 }
 
 .right_list {
@@ -137,6 +140,7 @@ img {
 	margin-bottom: 32px;
 	border: 1px solid #EBECF2;
 	width: 352px;
+	
 }
 .right_list:hover{
 	box-shadow:0px 10px 26px -4px rgba(0,0,0,0.09);

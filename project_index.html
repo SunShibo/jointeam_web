@@ -17,16 +17,28 @@
 						<img src="images/logo.png">
 					</div>
 					
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6">
-							<a v-if="isLogin" href="personalCenter.html">个人中心</a>
-							<a v-else href="login.html">登录</a>
-							</el-menu-item>
+					<el-menu @select="bindTap" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="index.html" >
+						首页
+						</el-menu-item>
+						<el-menu-item index="management.html">
+							行业资讯
+						</el-menu-item>
+						<el-menu-item index="aboutUs.html">
+							关于我们
+						</el-menu-item>
+						<el-menu-item index="template.html">
+							下载模板
+						</el-menu-item>
+						<el-menu-item index="project_index.html">
+							我的项目
+						</el-menu-item>
+						<el-menu-item index="personalCenter.html" v-if="isLogin">
+							个人中心
+						</el-menu-item>
+						<el-menu-item index="login.html" v-else>
+							登录
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>

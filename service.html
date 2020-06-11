@@ -18,7 +18,7 @@
 					</div>
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
+						<el-menu-item index="2"><a href="management.html">行业资讯</a></el-menu-item>
 						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
 						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
 						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
@@ -44,23 +44,49 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t" v-for="(item,index) in template" :key="index" v-show="index == num">
+									<div class="cards_t"  v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
 											<div class="card_mall" v-for="(itemList,index) in item.child" :key="index">
 												<div class="mall_titles">
 													<div class="mall_line"></div>
 													<p>{{itemList.typeName}}</p>
+													<p class="seeMore" @click="seeMore(itemList.id)">查看更多</p>
 												</div>
 												<div class="service_mall">
-													<div class="mall_img" v-for="(recordList,index) in records" v-if="itemList.id == recordList.typeId" :key="index" @click="mallDetails(recordList.id)">
+													<!-- 
+													<div class="mall_img" v-for="(recordList,index) in records" v-if="itemList.id == recordList.typeId " :key="index" @click="mallDetails(recordList.id)">
 														<div class="mall_contImg">
 															<img :src="recordList.image" />
 															<p>{{recordList.title}}</p>
 														</div>
 													</div>
+													 -->
+													 
+													 <div class="mall_img" v-for="(recordList,index) in getStart(itemList.id)"  :key="index" @click="mallDetails(recordList.id)">
+													 	<div class="mall_contImg">
+													 		<img  :src="recordList.image" />
+													 		<p>{{recordList.title}}</p>
+													 	</div>
+													 </div>
 												</div>
-
+												
+										<div class="serverMoreDiv">
+											<el-collapse-transition>
+									          <div  v-if="eIndex==itemList.id" class="transition-box">
+												  <div class="seeMoreInfo"  v-for="(citem,cIndex) in getEnd(itemList.id)" >
+												  		<img :src="citem.image" />
+												  		<p>{{citem.title}}</p>
+												  </div>
+												  
+												  
+												  
+												  
+									      </el-collapse-transition>										
 											</div>
+											
+											</div>
+											
+											
 										</div>
 									</div>
 								</div>

@@ -5,16 +5,78 @@ var cont = new Vue({
 			activeIndex: '2',
 			template: [],
 			num: 0,
-			records: []
+			records: [],
+			eIndex: -1,
 		}
 	},
+	/* computed: {
+		getStart: {
+			get: function() {},
+			set: function(typeId) {
+				let tempList = [];
+				for (var i = 0; i < this.records.length; i++) {
+					if (this.records[i].typeId == typeId) {
+						tempList.push(this.records[i]);
+						if(index==4){
+							
+						}
+					}
+				}
+				return tempList;
+			}
+
+		}
+	}, */
 	methods: {
+		getStart(typeId){
+			var that = this;
+			let tempList = [];
+			for (let i = 0; i < that.records.length; i++) {
+				if (that.records[i].typeId == typeId) {
+					tempList.push(that.records[i]);
+					if(tempList.length==4){
+						break;
+					}
+				}
+			}
+			//console.log("chenLIst:"+that.records.length);
+			return tempList;
+		},
+		getEnd(typeId){
+			var that = this;
+			let tempList = [];
+			for (let i = 0; i < that.records.length; i++) {
+				if (that.records[i].typeId == typeId) {
+					tempList.push(that.records[i]);
+				}
+			}
+			
+			let tempList02 = [];
+			for (let i = 0; i < tempList.length; i++) {
+				 if(i>4){
+					tempList02.push(tempList[i]);
+				}
+			}
+			
+			//console.log("chenLIst:"+tempList.length);
+			return tempList02;
+		}
+		,
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
+		},
+		seeMore(id) {
+			if (id == this.eIndex) {
+				this.eIndex = -1;
+			} else {
+				this.eIndex = id;
+			}
 		},
 		mallDetails(id) {
 			window.location.href = 'mallDetails.html?id=' + id
 		},
+
+		//查询大类型
 		queryTypes() {
 			var that = this;
 			axios.post(url + '/server/queryTypes')
@@ -38,6 +100,8 @@ var cont = new Vue({
 					console.log(error);
 				});
 		},
+
+
 		query(ids, index) {
 			var that = this;
 			that.num = index;
@@ -48,7 +112,7 @@ var cont = new Vue({
 			queryList.forEach(function(item, index) {
 				axios.post(url + '/server/query', {
 						typeId: item,
-						pageSize: 4,
+						pageSize: 1000,
 						pageNo: 1
 					})
 					.then(function(res) {
@@ -78,15 +142,15 @@ var cont = new Vue({
 			itemList.forEach(function(item, index) {
 				id.push(item.id)
 			})
-			
+
 			that.num = index;
 			var queryList = id;
 			var records = [];
-			
+
 			queryList.forEach(function(item, index) {
 				axios.post(url + '/server/query', {
 						typeId: item,
-						pageSize: 4,
+						pageSize: 10000,
 						pageNo: 1
 					})
 					.then(function(res) {
@@ -128,13 +192,12 @@ var cont = new Vue({
 }).$mount('#app')
 
 
-var height =  $('.cards_t').height();
+var height = $('.cards_t').height();
 $('.card_temp').css('height', height);
 
 $('.card_list_left').click(function() {
 	var heights = $('.cards_t').eq(index).height();
-	if(heights > height){
+	if (heights > height) {
 		$('.card_temp').css('height', heights)
 	}
 })
-

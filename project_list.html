@@ -16,20 +16,38 @@
 					<div class="logo">
 						<img src="images/logo.png">
 					</div>
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1"><a href="index.html">首页</a></el-menu-item>
-						<el-menu-item index="2"><a href="management.html">消息管理</a></el-menu-item>
-						<el-menu-item index="3"><a href="aboutUs.html">关于我们</a></el-menu-item>
-						<el-menu-item index="4"><a href="template.html">下载模板</a></el-menu-item>
-						<el-menu-item index="5"><a href="project_index.html">我的项目</a></el-menu-item>
-						<el-menu-item index="6"><a href="personalCenter.html">个人中心</a></el-menu-item>
+					<el-menu @select="bindTap" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="index.html" >
+						首页
+						</el-menu-item>
+						<el-menu-item index="management.html">
+							行业资讯
+						</el-menu-item>
+						<el-menu-item index="aboutUs.html">
+							关于我们
+						</el-menu-item>
+						<el-menu-item index="template.html">
+							下载模板
+						</el-menu-item>
+						<el-menu-item index="project_index.html">
+							我的项目
+						</el-menu-item>
+						<el-menu-item index="personalCenter.html" v-if="isLogin">
+							个人中心
+						</el-menu-item>
+						<el-menu-item index="login.html" v-else>
+							登录
+						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-main>
+					
 					<div class="headImg"></div>
-
+					
 					<div class="container">
 						<div class="content">
+							
+							<div v-if="progressList.length>0">
 							<div class="project">
 								
 								<div class="project_low">
@@ -40,7 +58,7 @@
 									<div class="progress">
 										<div class="startTime">
 											<span>开始时间</span>
-											<p>{{progressList[0].startFormatDate}}</p>
+											<p>{{projectStartTime}}</p>
 										</div>
 										<div class="timePro">
 											<p>已完成{{progressList[0].percentage}}%</p>
@@ -48,25 +66,25 @@
 										</div>
 										<div class="startTime endTime">
 											<span>预计结束时间</span>
-											<p>{{progressList[0].endFormatDate}}</p>
+											<p>{{projectEndTime}}</p>
 										</div>
 										
 									</div>
 									<ul class="timeLine">
-										<li class="timeLine_list" v-for="item in progressList">
+										<li   @click="goProjectDetail(item.projectInfoId)" class="timeLine_list" v-for="item in progressList">
 											<div class="time_right" v-if="item.status == 'finished'">
-												<p class="timeTime_time timeTime_times">{{item.formatStartTime}}</p>
-												<p class="timeTime_cont timeTime_times">{{item.title}}</p>
-												<p class="timeTime_pop timeTime_times">{{item.formatStartTime}}</p>
+												<p class="timeTime_time timeTime_times">{{item.formatDateTime}}</p>
+												<p class="timeTime_cont timeTime_times">{{item.statusText}} | {{item.title}}</p>
+												<p class="timeTime_pop timeTime_times">{{item.name}}</p>
 											</div>
 											<div class="time_right" v-else>
-												<p class="timeTime_time">{{item.formatStartTime}}</p>
-												<p class="timeTime_cont">{{item.title}}</p>
-												<p class="timeTime_pop">{{item.formatStartTime}}</p>
+												<p class="timeTime_time">{{item.formatDateTime}}</p>
+												<p class="timeTime_cont">{{item.statusText}} | {{item.title}}</p>
+												<p class="timeTime_pop">{{item.name}}</p>
 											</div>
-
-											<img v-bind:src="item.image" class="time_img">
-											<img src="images/group_1.png" alt="" class="time_icons" v-if="item.status == 'finished'">
+							
+											<img :src="item.image" class="time_img">
+											<img src="images/group_1.png" alt="" class="time_icons" v-if="item.completionStatus == 'having'">
 											<img src="images/group_2.png" alt="" class="time_icon" v-else>
 										</li>
 									</ul>
@@ -85,6 +103,8 @@
 									
 								</div>
 							</div>
+							</div>
+							<div class="emptyList" v-else>暂无数据</div>
 
 							<div class="card_temp">
 								<div class="cont_card_right">

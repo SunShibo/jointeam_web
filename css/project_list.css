@@ -116,7 +116,12 @@ img {
 	justify-content: space-between;
 	border-left: 1px solid #C9CBD7;
 	position: relative;
+	
 }
+.timeLine_list:hover{
+	box-shadow: 0px 10px 26px -4px rgba(0, 0, 0, 0.09);
+}
+
 
 .time_right {
 	margin-bottom: 32px;
@@ -226,6 +231,8 @@ img {
 
 .card_temp {
 	margin-left: 96px;
+	height: 500px;
+	overflow: auto;
 }
 
 .right_list {
@@ -289,4 +296,12 @@ img {
 	font-family: PingFangSC-Semibold, PingFang SC;
 	font-weight: 600;
 	color: #AEAFBA;
+}
+
+.emptyList{
+	width: 600px;
+	height: 500px;
+	text-align: center;
+	font-size: 22px;
+	line-height: 200px;
 }

@@ -7,7 +7,9 @@ var cont = new Vue({
 			activeIndex: '4',
 			progressList: [],
 			projectList: [],
-			staffBO:{}
+			staffBO:{},
+			activeIndex:"project_index.html",
+			isLogin:false
 		}
 
 	},
@@ -16,11 +18,28 @@ var cont = new Vue({
 		this.staffId =  getQueryVariable('staffId');
 	},
 	mounted() {
+		var cookie =  localStorage.getItem('cookie');
+		if(cookie!=null && cookie.length){
+			this.isLogin = true;
+		}else{
+			this.isLogin = false;
+		}
+		if(this.isLogin){
 		this.initProject();
 		this.initProgress();
+		}else{
+			window.location.href = "login.html";
+		}
 	}
 	,
 	methods: {
+		goProjectDetail(id){
+		
+		}
+		,
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
+		},
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
@@ -37,7 +56,7 @@ var cont = new Vue({
 					method: 'POST',
 					data: {
 						pageNo: 1,
-						pageSize: 5,
+						pageSize: 1000,
 						accomplishStatus:"having"
 					},
 					headers: {
@@ -107,8 +126,19 @@ var cont = new Vue({
 						// });
 						
 						for (let i = 0; i < progressArr.length; i++) {
-						 	progressArr[i]["startFormatDate"] = formatTime(progressArr[i].startTime);
-						 	progressArr[i]["endFormatDate"] = formatTime(progressArr[i].predictEndTime);
+						 	// progressArr[i]["startFormatDate"] = formatDate(progressArr[i].startTime);
+						 	// progressArr[i]["endFormatDate"] = formatDate(progressArr[i].predictEndTime);
+						 	progressArr[i]["formatDateTime"] = formatDateTime(progressArr[i].date);
+						    let status =  progressArr[i].completionStatus;
+							let tempText = "";
+							if(status==="notStart"){
+								tempText = "未开始"
+							}else if(status==="having"){
+								tempText = "进行中"
+							}else{
+								tempText = "已结束"
+							}
+							progressArr[i]["statusText"] = tempText;
 						};
 						vm.staffBO = response.data.data.staffBO;
 						vm.progressList = progressArr;
@@ -119,6 +149,14 @@ var cont = new Vue({
 				.catch(function(error) {
 					console.log(error);
 				});
+		}
+	},
+	computed:{
+		projectStartTime(){
+			return formatDate(this.progressList[0].startTime);
+		},
+		projectEndTime(){
+			return formatDate(this.progressList[0].predictEndTime);
 		}
 	}
 }).$mount('#app')

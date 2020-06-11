@@ -51,13 +51,54 @@ function getQueryVariable(variable) {
 }
 
 //格式化时间
-function formatTime(date) {
-	var date = new Date(date);
+function formatTime(dateTime) {
+	var date = new Date(dateTime);
 	M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
 	D = date.getDate() + ' ';
 	h = date.getHours() + ':';
 	m = date.getMinutes() + ':';
 	return M + D + h + m
+}
+
+//格式化时间
+function formatDate(dateTime) {
+	var date = new Date(dateTime);
+	Y = date.getFullYear();
+	M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    D = date.getDate();
+	return Y+"-"+M+"-"+D
+}
+
+
+function formatDateTime(dateTime){
+	var date = new Date(dateTime);
+	M = date.getMonth()+1;
+	d = date.getDate() ;
+	day =  date.getDay()+1;
+	var text = "";
+	switch(day){
+		case 1:
+		text = "一";
+		
+		case 2:
+		text = "二";
+		
+		case 3:
+		text = "三";
+		
+		case 4:
+		text = "四";
+		
+		case 5:
+		text = "五";
+		
+		case 6:
+		text = "六";
+		
+		case 7:
+		text = "日";
+	}
+	return M+"月"+d+"日"+" "+"星期"+text;
 }
 
 //oss对象

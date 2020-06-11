@@ -2,7 +2,7 @@ new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '3',
+			activeIndex: 'aboutUs.html',
 			introd:[
 				{name:'国家高新技术企业、中关村高新技术企业'},
 				{name:'工程咨询资质'},
@@ -20,6 +20,9 @@ new Vue({
 	methods: {
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
+		},
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
 		}
 	},
 	created(){

@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: '2',
+			activeIndex: 'management.html',
 			records:[],
 			recordsList:[],
 recordsList:[],
@@ -16,6 +16,11 @@ isLogin: false,
 		handleSelect(key, keyPath) {
 //			console.log(key, keyPath);
 		},
+		
+		bindTap(key, keyPath){
+			window.location.href = keyPath;
+		}
+		,
 		selectPoliticsList(){
 			var that = this;
 			axios.post(url + '/politics/selectPoliticsList',{
@@ -60,6 +65,7 @@ isLogin: false,
 				});
 		},
 		politics(id){
+			
 			var that = this;
 			axios.post(url + '/industry/selectIndustryById',{
 				id:id
@@ -67,6 +73,7 @@ isLogin: false,
 				.then(function(res) {
 					// console.log(res); 
 					if(res.data.success = true) {
+				_czc.push(['_trackEvent', '资讯', '查看行业资讯', '资讯','1','news']);
 						let record = res.data.data;
 						let records = that.records;
 						records.splice(0,records.length);
