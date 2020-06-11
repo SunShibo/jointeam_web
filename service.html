@@ -27,7 +27,7 @@
 						</el-menu>
 					</el-header>
 				</div>
-				
+
 				<el-main>
 					<div class="headImg">
 						<p class="headTitle">服务商城</p>
@@ -47,7 +47,7 @@
 									</div>
 								</div>
 								<div class="card_temp">
-									<div class="cards_t"  v-for="(item,index) in template" :key="index" v-show="index == num">
+									<div class="cards_t" v-for="(item,index) in template" :key="index" v-show="index == num">
 										<div class="cont_card_right">
 											<div class="card_mall" v-for="(itemList,index) in item.child" :key="index">
 												<div class="mall_titles">
@@ -64,39 +64,33 @@
 														</div>
 													</div>
 													 -->
-													 
-													 <div class="mall_img" v-for="(recordList,index) in getStart(itemList.id)"  :key="index" @click="mallDetails(recordList.id)">
-													 	<div class="mall_contImg">
-													 		<img  :src="recordList.image" />
-													 		<p>{{recordList.title}}</p>
-													 	</div>
-													 </div>
+
+													<div class="mall_img" v-for="(recordList,index) in getStart(itemList.id)" :key="index" @click="mallDetails(recordList.id)">
+														<div class="mall_contImg">
+															<img :src="recordList.image" />
+															<p>{{recordList.title}}</p>
+														</div>
+													</div>
 												</div>
-												
-										<div class="serverMoreDiv">
-											<el-collapse-transition>
-									          <div  v-if="eIndex==itemList.id" class="transition-box">
-												  <div class="seeMoreInfo"  v-for="(citem,cIndex) in getEnd(itemList.id)" >
-												  		<img :src="citem.image" />
-												  		<p>{{citem.title}}</p>
-												  </div>
-												  
-												  
-												  
-												  
-									      </el-collapse-transition>										
+
+												<div class="serverMoreDiv">
+													<el-collapse-transition>
+														<div v-if="eIndex==itemList.id" class="transition-box">
+															<div class="seeMoreInfo" v-for="(citem,cIndex) in getEnd(itemList.id)">
+																<img :src="citem.image" />
+																<p>{{citem.title}}</p>
+															</div>
+														</div>
+													</el-collapse-transition>
+												</div>
 											</div>
-											
-											</div>
-											
-											
+
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</el-main>
 				<el-footer>© 2020 中竞集团. All Rights Reserved &nbsp; 京ICP备05046329号-1 &nbsp; 京公网安备11010802009768</el-footer>
 			</el-container>
