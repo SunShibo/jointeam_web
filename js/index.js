@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: 'index.html',
+			activeIndex: '1',
 			bannerUrl: [],
 			isLogin: false,
 			industry: {

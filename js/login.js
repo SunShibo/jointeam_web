@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: 'login.html',
+			activeIndex: '6',
 			phone: '',
 			password: '',
 			checked: true

@@ -2,7 +2,7 @@ new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: 'aboutUs.html',
+			activeIndex: '3',
 			introd:[
 				{name:'国家高新技术企业、中关村高新技术企业'},
 				{name:'工程咨询资质'},

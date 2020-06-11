@@ -2,7 +2,7 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: 'personalCenter.html',
+			activeIndex: '6',
 			imageUrl: 'images/my.png',
 			isLogin: false,
 			tempLists:[],
@@ -462,15 +462,11 @@ var cont = new Vue({
 
 }).$mount('#app')
 
-<<<<<<< HEAD
-=======
-// var height = 138 * cont.card.length;
 
 
 var height = $('.cards_t').height();
 $('.card_temp').css('height', height)
 
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 $('.card_list_left:first').addClass('light_greycolor');
 $('.card_img:first').attr('src', 'images/right_2.png');
 $('.cards_t:first').addClass('temps').siblings('div').removeClass('temps');
@@ -492,15 +488,10 @@ $('.card_list_left').click(function() {
 	$(this).siblings().find('img').attr('src', 'images/right_1.png');
 
 	$('.cards_t').eq(index).addClass('temps').siblings('div').removeClass('temps');
-<<<<<<< HEAD
+
 	var height = $('.cards_t').eq(index).height();
 	$('.card_temp').css('height', height)
 	if(height < 200){
 		$('.card_temp').css('height', height+400)
-=======
-	var heights = $('.cards_t').eq(index).height();
-	if (heights > height) {
-		$('.card_temp').css('height', heights)
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 	}
 })

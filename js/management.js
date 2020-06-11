@@ -2,34 +2,33 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-			activeIndex: 'management.html',
-			records:[],
-			recordsList:[],
-recordsList:[],
-recordLength:[],
-pageNo: 1,
-pageSize: 5,
-isLogin: false,
+			activeIndex: '2',
+			records: [],
+			recordsList: [],
+			recordsList: [],
+			recordLength: [],
+			pageNo: 1,
+			pageSize: 5,
+			isLogin: false,
 		};
 	},
 	methods: {
 		handleSelect(key, keyPath) {
-//			console.log(key, keyPath);
+			//			console.log(key, keyPath);
 		},
-		
-		bindTap(key, keyPath){
+
+		bindTap(key, keyPath) {
 			window.location.href = keyPath;
-		}
-		,
-		selectPoliticsList(){
+		},
+		selectPoliticsList() {
 			var that = this;
-			axios.post(url + '/politics/selectPoliticsList',{
-				pageNo:1,
-				pageSize:1
-			})
+			axios.post(url + '/politics/selectPoliticsList', {
+					pageNo: 1,
+					pageSize: 1
+				})
 				.then(function(res) {
 					// console.log(res);
-					if(res.data.success = true) {
+					if (res.data.success = true) {
 						that.records = res.data.data.records;
 					} else {
 						alert(res.data.msg)
@@ -39,21 +38,21 @@ isLogin: false,
 					console.log(error);
 				});
 		},
-		selectIndustryList(){
+		selectIndustryList() {
 			var cookie = localStorage.getItem('cookie');
-			if(cookie!=null && cookie.length){
+			if (cookie != null && cookie.length) {
 				this.isLogin = true;
-			}else{
+			} else {
 				this.isLogin = false;
 			}
 			var that = this;
-			axios.post(url + '/industry/selectIndustryList',{
-				pageNo: that.pageNo,
-				pageSize: that.pageSize
-			})
+			axios.post(url + '/industry/selectIndustryList', {
+					pageNo: that.pageNo,
+					pageSize: that.pageSize
+				})
 				.then(function(res) {
 					console.log(res);
-					if(res.data.success = true) {
+					if (res.data.success = true) {
 						that.recordLength = res.data.data.records;
 						that.recordsList = that.recordsList.concat(res.data.data.records);
 					} else {
@@ -64,19 +63,19 @@ isLogin: false,
 					console.log(error);
 				});
 		},
-		politics(id){
-			
+		politics(id) {
+
 			var that = this;
-			axios.post(url + '/industry/selectIndustryById',{
-				id:id
-			})
+			axios.post(url + '/industry/selectIndustryById', {
+					id: id
+				})
 				.then(function(res) {
 					// console.log(res); 
-					if(res.data.success = true) {
-				_czc.push(['_trackEvent', '资讯', '查看行业资讯', '资讯','1','news']);
+					if (res.data.success = true) {
+						_czc.push(['_trackEvent', '资讯', '查看行业资讯', '资讯', '1', 'news']);
 						let record = res.data.data;
 						let records = that.records;
-						records.splice(0,records.length);
+						records.splice(0, records.length);
 						records.push(record);
 						console.log(that.records)
 					} else {
@@ -87,18 +86,18 @@ isLogin: false,
 					console.log(error);
 				});
 		},
-		queryDetails(){
+		queryDetails() {
 			var id = getQueryString('id');
 			var that = this;
-			axios.post(url + '/politics/selectPoliticsById',{
-				id:id
-			})
+			axios.post(url + '/politics/selectPoliticsById', {
+					id: id
+				})
 				.then(function(res) {
 					// console.log(res); 
-					if(res.data.success = true) {
+					if (res.data.success = true) {
 						let record = res.data.data;
 						let records = that.records;
-						records.splice(0,records.length);
+						records.splice(0, records.length);
 						records.push(record);
 					} else {
 						alert(res.data.msg)
@@ -108,18 +107,18 @@ isLogin: false,
 					console.log(error);
 				});
 		},
-		selectIndustry(){
+		selectIndustry() {
 			var id = getQueryString('id');
 			var that = this;
-			axios.post(url + '/industry/selectIndustryById',{
-				id:id
-			})
+			axios.post(url + '/industry/selectIndustryById', {
+					id: id
+				})
 				.then(function(res) {
 					// console.log(res); 
-					if(res.data.success = true) {
+					if (res.data.success = true) {
 						let record = res.data.data;
 						let records = that.records;
-						records.splice(0,records.length);
+						records.splice(0, records.length);
 						records.push(record);
 					} else {
 						alert(res.data.msg)
@@ -137,27 +136,27 @@ isLogin: false,
 			return (m < 10 ? "0" + m : m) + "/" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8);
 		}
 	},
-	mounted(){
+	mounted() {
 		this.selectIndustryList();
 		var id = getQueryString('id');
 		var status = getQueryString('status');
-		if(id){
-			if(status){
+		if (id) {
+			if (status) {
 				this.selectIndustry();
-			}else{
+			} else {
 				this.queryDetails();
 			}
-		}else{
+		} else {
 			this.selectPoliticsList();
 		}
-		
+
 	}
 }).$mount('#app')
 
 function getQueryString(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 	var r = window.location.search.substr(1).match(reg);
-	if(r != null) return unescape(r[2]);
+	if (r != null) return unescape(r[2]);
 	return null;
 }
 

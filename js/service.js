@@ -6,11 +6,8 @@ var cont = new Vue({
 			template: [],
 			num: 0,
 			records: [],
-<<<<<<< HEAD
-			height_s:[]
-=======
-			eIndex: -1,
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
+			height_s: [],
+			eIndex: -1
 		}
 	},
 	/* computed: {
@@ -32,13 +29,13 @@ var cont = new Vue({
 		}
 	}, */
 	methods: {
-		getStart(typeId){
+		getStart(typeId) {
 			var that = this;
 			let tempList = [];
 			for (let i = 0; i < that.records.length; i++) {
 				if (that.records[i].typeId == typeId) {
 					tempList.push(that.records[i]);
-					if(tempList.length==4){
+					if (tempList.length == 4) {
 						break;
 					}
 				}
@@ -46,7 +43,7 @@ var cont = new Vue({
 			//console.log("chenLIst:"+that.records.length);
 			return tempList;
 		},
-		getEnd(typeId){
+		getEnd(typeId) {
 			var that = this;
 			let tempList = [];
 			for (let i = 0; i < that.records.length; i++) {
@@ -54,18 +51,17 @@ var cont = new Vue({
 					tempList.push(that.records[i]);
 				}
 			}
-			
+
 			let tempList02 = [];
 			for (let i = 0; i < tempList.length; i++) {
-				 if(i>4){
+				if (i > 4) {
 					tempList02.push(tempList[i]);
 				}
 			}
-			
+
 			//console.log("chenLIst:"+tempList.length);
 			return tempList02;
-		}
-		,
+		},
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
@@ -154,12 +150,8 @@ var cont = new Vue({
 			that.num = index;
 			var queryList = id;
 			var records = [];
-<<<<<<< HEAD
 			$('.card_temp').css('height', 280 * items.child.length);
-			
-=======
 
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 			queryList.forEach(function(item, index) {
 				axios.post(url + '/server/query', {
 						typeId: item,
@@ -189,8 +181,6 @@ var cont = new Vue({
 	}
 }).$mount('#app')
 
-<<<<<<< HEAD
-=======
 
 var height = $('.cards_t').height();
 $('.card_temp').css('height', height);
@@ -201,4 +191,3 @@ $('.card_list_left').click(function() {
 		$('.card_temp').css('height', heights)
 	}
 })
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7

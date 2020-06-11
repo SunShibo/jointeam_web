@@ -2,7 +2,6 @@ var cont = new Vue({
 	// el:'#app',
 	data() {
 		return {
-<<<<<<< HEAD
 			activeIndex: '4',
 			eIndex: 0,
 			isLogin: false,
@@ -13,30 +12,6 @@ var cont = new Vue({
 			pageSize: 100,
 			height:'',
 			height_h:''
-=======
-			activeIndex: 'template.html',
-			eIndex:0,
-			isLogin:false,
-			card:[
-				// {name:'质检报告'},
-				// {name:'质检报告1'},
-				// {name:'质检报告2'},
-				// {name:'质检报告3'}
-			],
-			template:[
-				// {temp:'质量验收模板'},
-				// {temp:'质量验收模板1'},
-				// {temp:'质量验收模板2'},
-				// {temp:'质量验收模板3'}
-			],
-			itemTemp:[
-				{name:'时间设计点击俺就'},
-				{name:'分手的'},
-				{name:'的热无若'}
-			],
-			pageNo:1,
-			pageSize:100
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 		}
 
 	},
@@ -44,15 +19,10 @@ var cont = new Vue({
 		handleSelect(key, keyPath) {
 			console.log(key, keyPath);
 		},
-<<<<<<< HEAD
-		cutTab(index, typeId) {
-=======
 		bindTap(key, keyPath){
 			window.location.href = keyPath;
-		}
-		,
+		},
 		cutTab(index,typeId){
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 			this.eIndex = index;
 			this.queryTemplateList(typeId);
 			var heights = $('.cards_t').height();
@@ -87,12 +57,8 @@ var cont = new Vue({
 				$('.card_temp').css('height', 170*height_s/2);
 			});
 		},
-<<<<<<< HEAD
-		downloadFile(path) {
-=======
 		downloadFile(path){
 			_czc.push(['_trackEvent', '模板', '下载模板', '下载模板','1','template']);
->>>>>>> 9fa909db46bd021321c63d1c8523a7c6ad793bd7
 			window.open(path);
 		},
 
